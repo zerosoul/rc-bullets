@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.js": "/rc-bullets/static/js/main.f9d549a8.chunk.js",
-    "main.js.map": "/rc-bullets/static/js/main.f9d549a8.chunk.js.map",
+    "main.js": "/rc-bullets/static/js/main.4686d06f.chunk.js",
+    "main.js.map": "/rc-bullets/static/js/main.4686d06f.chunk.js.map",
     "runtime-main.js": "/rc-bullets/static/js/runtime-main.0cd9117e.js",
     "runtime-main.js.map": "/rc-bullets/static/js/runtime-main.0cd9117e.js.map",
     "static/js/2.1db03b8b.chunk.js": "/rc-bullets/static/js/2.1db03b8b.chunk.js",
     "static/js/2.1db03b8b.chunk.js.map": "/rc-bullets/static/js/2.1db03b8b.chunk.js.map",
     "index.html": "/rc-bullets/index.html",
-    "precache-manifest.daedb52a77cbf99e9144e4674d5d9402.js": "/rc-bullets/precache-manifest.daedb52a77cbf99e9144e4674d5d9402.js",
+    "precache-manifest.ead27a473390e8a513839b9e72ade8b7.js": "/rc-bullets/precache-manifest.ead27a473390e8a513839b9e72ade8b7.js",
     "service-worker.js": "/rc-bullets/service-worker.js",
     "static/media/avator.jpg": "/rc-bullets/static/media/avator.83885266.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.0cd9117e.js",
     "static/js/2.1db03b8b.chunk.js",
-    "static/js/main.f9d549a8.chunk.js"
+    "static/js/main.4686d06f.chunk.js"
   ]
 }
