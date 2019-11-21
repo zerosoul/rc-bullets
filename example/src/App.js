@@ -4,7 +4,7 @@ import DashboardPage from './containers/Dashboard';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 const App = () => {
   return (
-    <Router>
+    <Router basename={process.env.NODE_ENV == 'production' ? '/rc-bullets' : ''}>
       <Switch>
         <Route path={`/`} exact component={DashboardPage} />
         <Route path={`/preview`} component={DemoPage} />
