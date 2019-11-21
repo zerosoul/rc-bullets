@@ -1,13 +1,15 @@
-import React, { Component } from 'react'
-
-import ExampleComponent from 'react-barrage'
-
-export default class App extends Component {
-  render () {
-    return (
-      <div>
-        <ExampleComponent text='Modern React component module' />
-      </div>
-    )
-  }
-}
+import React from 'react';
+import DemoPage from './containers/Screen';
+import DashboardPage from './containers/Dashboard';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+const App = () => {
+  return (
+    <Router>
+      <Switch>
+        <Route path={`/`} exact component={DashboardPage} />
+        <Route path={`/preview`} component={DemoPage} />
+      </Switch>
+    </Router>
+  );
+};
+export default App;

@@ -1,20 +1,37 @@
 {
-  "name": "react-barrage-example",
-  "homepage": "https://zerosoul.github.io/react-barrage",
+  "name": "rc-bullets-example",
+  "homepage": "https://zerosoul.github.io/rc-bullets",
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "prop-types": "^15.6.2",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
-    "react-scripts": "^1.1.4",
-    "react-barrage": "file:.."
+    "prop-types": "^15.7.2",
+    "rc-bullets": "file:..",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-router-dom": "^5.1.2",
+    "styled-components": "^4.4.1",
+    "styled-reset": "^4.0.6"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "react-scripts": "^3.2.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
