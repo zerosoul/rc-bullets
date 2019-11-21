@@ -8,6 +8,7 @@ import Img1 from '../assets/img/avator.jpg';
 
 const StyledWrapper = styled.section`
   .opts {
+    z-index: 9999;
     position: fixed;
     width: 100%;
     bottom: 0;
@@ -24,9 +25,10 @@ const StyledWrapper = styled.section`
     }
     .input,
     .dur,
-    .img {
+    .img,
+    .theme {
       padding: 0.5rem 0.8rem;
-      margin-bottom: 2rem;
+      margin: 0 1rem;
     }
     .sendBtn {
       cursor: pointer;

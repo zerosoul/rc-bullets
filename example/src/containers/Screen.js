@@ -29,7 +29,7 @@ export default function ScreenPage({ screen }) {
       <button onClick={handleAnimateState}>{paused ? 'resume' : 'pause'}</button>
       <button onClick={handleClear}>clear</button>
       <button onClick={handleVisible}>{visible ? 'hide' : 'show'}</button>
-      <section style={{ height: '60vh' }} className="screen"></section>
+      <section style={{ height: '100vh' }} className="screen"></section>
     </>
   );
 }

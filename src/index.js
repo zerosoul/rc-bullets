@@ -4,6 +4,7 @@ import { getMsgNode, initBulletAnimate } from './helper';
 import StyledBullet from './StyledBullet';
 
 const defaultOpts = {
+  animate: 'RightToLeft',
   pauseOnHover: true,
   loopCount: 'infinite',
   duration: 10,
@@ -39,10 +40,15 @@ export default class Bullet {
     initBulletAnimate(this.target);
   }
   push(item, opts = defaultOpts) {
-    const { duration, loopCount, animateTimeFun, pauseOnHover, color, bgColor } = Object.assign(
-      defaultOpts,
-      opts
-    );
+    const {
+      animate,
+      duration,
+      loopCount,
+      animateTimeFun,
+      pauseOnHover,
+      color,
+      bgColor
+    } = Object.assign(defaultOpts, opts);
     // 实时获取屏幕的宽高
     const { height: screenHeight } = this.target.getBoundingClientRect();
     // 创建单条弹幕的容器
@@ -59,10 +65,11 @@ export default class Bullet {
     bulletContainer.style.left = 0;
     bulletContainer.style.zIndex = 9;
     bulletContainer.style.visibility = 'hidden';
-    bulletContainer.style.animationName = 'barrage';
+    bulletContainer.style.animationName = animate;
     bulletContainer.style.animationIterationCount = loopCount;
     bulletContainer.style.animationDuration = `${duration}s`;
     bulletContainer.style.animationTimingFunction = animateTimeFun;
+
     // 性能小优化
     bulletContainer.style.willChange = 'transform';
     if (this.allHide) {
