@@ -7,7 +7,7 @@ const App = () => {
     <Router basename={process.env.NODE_ENV == 'production' ? '/rc-bullets' : ''}>
       <Switch>
         <Route path={`/`} exact component={DashboardPage} />
-        <Route path={`/preview`} component={DemoPage} />
+        <Route path={`preview`} component={DemoPage} />
       </Switch>
     </Router>
   );
