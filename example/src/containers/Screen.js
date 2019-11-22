@@ -34,7 +34,7 @@ export default function ScreenPage({ screen }) {
 
   return (
     <>
-      <aside style={{ position: 'fixed', left: 0, top: 0 }}>
+      <aside style={{ position: 'fixed', left: 0, top: 0, zIndex: 999 }}>
         <IconButton onClick={handleClear}>
           <RotateLeft color="error"></RotateLeft>
         </IconButton>

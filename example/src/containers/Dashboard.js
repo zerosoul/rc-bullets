@@ -218,7 +218,7 @@ export default function Dashboard() {
         <Grid container spacing={2} alignItems="center" justify="center">
           <Grid item>
             <IconButton ref={popperAnchorEl} onClick={togglePopper}>
-              <Settings />
+              <Settings color="secondary" />
             </IconButton>
           </Grid>
           <Grid item xs={6}>

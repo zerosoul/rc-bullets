@@ -12,9 +12,9 @@ const App = () => {
       createMuiTheme({
         palette: {
           primary: {
-            main: '#177cb0'
+            main: '#25f8cb'
           },
-          secondary: { main: '#4c8dae' },
+          secondary: { main: '#d2f0f4' },
           error: {
             main: '#dc3023'
           },
