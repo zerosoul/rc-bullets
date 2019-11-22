@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import BulletScreen from 'rc-bullets';
 import BulletsScreen from './Screen';
-import { getRandomTheme, themes, animateFuns } from '../helper';
+import { getRandomTheme, themes, animateFuns, getRandomAniFun } from '../helper';
 import Img1 from '../assets/img/avator.jpg';
 
 const StyledWrapper = styled.section`
@@ -55,7 +55,7 @@ export default function Dashboard() {
   const [currScreen, setCurrScreen] = useState(null);
   const [bullet, setBullet] = useState('');
   const [theme, setTheme] = useState('random');
-  const [animateFun, setAnimateFun] = useState('linear');
+  const [animateFun, setAnimateFun] = useState('random');
   const [duration, setDuration] = useState(20);
   const [img, setImg] = useState('');
   useEffect(() => {
@@ -73,10 +73,11 @@ export default function Dashboard() {
     if (bullet) {
       console.log('start send');
 
+      let currAnimateKey = animateFun == 'random' ? getRandomAniFun() : animateFun;
       let currThemeKey = theme == 'random' ? getRandomTheme() : theme;
       let { color, bgColor } = themes[currThemeKey];
       let obj = {
-        animateTimeFun: animateFun,
+        animateTimeFun: currAnimateKey,
         txt: bullet,
         duration,
         img,
@@ -123,7 +124,7 @@ export default function Dashboard() {
       </Link>
       <div className="opts">
         <select className="img" value={img} onChange={handleImgSelect}>
-          <option value="">select head image</option>
+          <option value="">选择头像</option>
           <option value={Img1}>girl</option>
           <option
             value={
@@ -134,7 +135,7 @@ export default function Dashboard() {
           </option>
         </select>
         <select className="theme" value={theme} onChange={handleThemeSelect}>
-          <option value="random">random theme</option>
+          <option value="random">主题色(默认随机)</option>
           {Object.keys(themes).map(key => {
             return (
               <option key={key} value={key}>
@@ -144,10 +145,11 @@ export default function Dashboard() {
           })}
         </select>
         <select className="animateFun" value={animateFun} onChange={handleAnimateFunSelect}>
-          {animateFuns.map(fun => {
+          <option value="random">运动函数(默认随机)</option>
+          {Object.keys(animateFuns).map(key => {
             return (
-              <option key={fun} value={fun}>
-                {fun}
+              <option key={key} value={key}>
+                {animateFuns[key].title}
               </option>
             );
           })}
@@ -157,17 +159,17 @@ export default function Dashboard() {
           value={duration}
           onChange={handleDurChange}
           type="number"
-          placeholder="duration"
+          placeholder="时长（秒）"
         />
         <textarea
           rows="4"
           className="input"
           value={bullet}
           onChange={handleInput}
-          placeholder="input bullet"
+          placeholder="输入弹幕内容"
         />
         <button className="sendBtn" onClick={handleSend}>
-          send
+          发送弹幕
         </button>
       </div>
     </StyledWrapper>

@@ -1,12 +1,12 @@
 {
   "name": "rc-bullets-example",
   "homepage": "https://zerosoul.github.io/rc-bullets",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "license": "MIT",
   "private": true,
   "dependencies": {
     "prop-types": "^15.7.2",
-    "rc-bullets": "file:..",
+    "rc-bullets": "^1.0.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-router-dom": "^5.1.2",

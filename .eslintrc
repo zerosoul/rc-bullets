@@ -19,9 +19,7 @@
       "jsx": true
     }
   },
-  "globals": {
-    "UE": true
-  },
+
   "env": {
     "browser": true,
     "node": true,

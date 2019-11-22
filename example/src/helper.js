@@ -38,13 +38,29 @@ const getRandomTheme = () => {
   return tmpKey;
 };
 
-const animateFuns = [
-  'linear',
-  'ease',
-  'ease-in-out',
-  'ease-out',
-  'ease-in',
-  'cubic-bezier(0.2,-2,0.8,2)',
-  'steps(10, end)'
-];
-export { getRandomTheme, themes, animateFuns };
+const animateFuns = {
+  linear: {
+    title: '匀速'
+  },
+  ease: {
+    title: '慢-快-慢'
+  },
+  'ease-out': {
+    title: '快-慢'
+  },
+  'ease-in': {
+    title: '慢-快'
+  },
+  'cubic-bezier(0.2,-2,0.8,2)': {
+    titile: 'cubic-bezier'
+  },
+  'steps(10, end)': {
+    title: '步进'
+  }
+};
+const getRandomAniFun = () => {
+  const keys = Object.keys(animateFuns);
+  let tmpKey = keys[Math.floor(Math.random() * keys.length)];
+  return tmpKey;
+};
+export { getRandomTheme, themes, animateFuns, getRandomAniFun };

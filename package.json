@@ -1,6 +1,6 @@
 {
   "name": "rc-bullets",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "awesome barrage with react component ",
   "author": "zerosoul",
   "license": "MIT",
@@ -15,7 +15,7 @@
   "scripts": {
     "build": "rollup -c",
     "start": "rollup -c -w",
-    "prepare": "npm run build",
+    "prepare": "rm -rf ./dist && npm run build",
     "predeploy": "cd example && npm install && npm run build",
     "deploy": "gh-pages -d example/build"
   },

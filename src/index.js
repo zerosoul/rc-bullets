@@ -6,7 +6,7 @@ import StyledBullet from './StyledBullet';
 const defaultOpts = {
   animate: 'RightToLeft',
   pauseOnHover: true,
-  loopCount: 'infinite',
+  loopCount: 1,
   duration: 10,
   color: '#fff',
   bgColor: 'rgba(2,2,2,.4)',
@@ -31,7 +31,7 @@ export default class Bullet {
     }
 
     // 屏幕目标必须具备的CSS样式
-    const position = getComputedStyle(this.target).position;
+    const { position } = getComputedStyle(this.target);
     if (position === 'static') {
       this.target.style.position = 'relative';
       this.target.style.overflow = 'hidden';

@@ -26,9 +26,9 @@ export default function ScreenPage({ screen }) {
 
   return (
     <>
-      <button onClick={handleAnimateState}>{paused ? 'resume' : 'pause'}</button>
-      <button onClick={handleClear}>clear</button>
-      <button onClick={handleVisible}>{visible ? 'hide' : 'show'}</button>
+      <button onClick={handleAnimateState}>{paused ? '继续' : '暂停'}</button>
+      <button onClick={handleClear}>清除</button>
+      <button onClick={handleVisible}>{visible ? '隐藏' : '显示'}</button>
       <section style={{ height: '100vh' }} className="screen"></section>
     </>
   );
