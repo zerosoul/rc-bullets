@@ -3,8 +3,14 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import BulletScreen from 'rc-bullets';
 import BulletsScreen from './Screen';
-import { getRandomTheme, themes, animateFuns, getRandomAniFun } from '../helper';
-import Img1 from '../assets/img/avator.jpg';
+import {
+  getRandomTheme,
+  themes,
+  animateFuns,
+  getRandomAniFun,
+  heads,
+  getRandomHead
+} from '../helper';
 
 const StyledWrapper = styled.section`
   .opts {
@@ -57,7 +63,7 @@ export default function Dashboard() {
   const [theme, setTheme] = useState('random');
   const [animateFun, setAnimateFun] = useState('random');
   const [duration, setDuration] = useState(20);
-  const [img, setImg] = useState('');
+  const [img, setImg] = useState('random');
   useEffect(() => {
     let tmp = new BulletScreen('.screen');
     setCurrScreen(tmp);
@@ -73,21 +79,24 @@ export default function Dashboard() {
     if (bullet) {
       console.log('start send');
 
-      let currAnimateKey = animateFun == 'random' ? getRandomAniFun() : animateFun;
-      let currThemeKey = theme == 'random' ? getRandomTheme() : theme;
+      let currAnimateKey = animateFun === 'random' ? getRandomAniFun() : animateFun;
+      let currThemeKey = theme === 'random' ? getRandomTheme() : theme;
+      let currImg = img === 'random' ? getRandomHead() : img;
       let { color, bgColor } = themes[currThemeKey];
       let obj = {
         animateTimeFun: currAnimateKey,
         txt: bullet,
         duration,
-        img,
+        img: currImg,
         color,
         bgColor,
         ts: new Date().getTime()
       };
-      const { txt, ...opts } = obj;
-      const newValue = img ? { msg: txt, img } : txt;
-      currScreen.push(newValue, { ...opts });
+      console.log({ obj });
+
+      const { txt, img: newImg, ...opts } = obj;
+      // const newValue = img ? { msg: txt, img: newImg } : txt;
+      currScreen.push({ msg: txt, img: newImg }, { ...opts });
       // send by localStorage
       let newV = JSON.stringify(obj);
       console.log({ newV });
@@ -124,22 +133,22 @@ export default function Dashboard() {
       </Link>
       <div className="opts">
         <select className="img" value={img} onChange={handleImgSelect}>
-          <option value="">选择头像</option>
-          <option value={Img1}>girl</option>
-          <option
-            value={
-              'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K'
-            }
-          >
-            react
-          </option>
+          <option value="random">头像(默认随机)</option>
+          {heads.map(head => {
+            const { title, path } = head;
+            return (
+              <option key={path} value={path}>
+                {title}
+              </option>
+            );
+          })}
         </select>
         <select className="theme" value={theme} onChange={handleThemeSelect}>
           <option value="random">主题色(默认随机)</option>
           {Object.keys(themes).map(key => {
             return (
               <option key={key} value={key}>
-                {key}
+                {themes[key].title}
               </option>
             );
           })}

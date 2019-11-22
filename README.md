@@ -1,6 +1,6 @@
-# rc-bullets
+# React 弹幕组件
 
-> awesome barrage for react component
+> 一款可扩展、高性能
 
 [![NPM](https://img.shields.io/npm/v/rc-bullets.svg)](https://www.npmjs.com/package/rc-bullets)
 
