@@ -46,6 +46,10 @@ const heads = [
   {
     title: '气质美女',
     path: 'assets/img/heads/nv2.jpg'
+  },
+  {
+    title: '动图',
+    path: 'assets/img/heads/xiongmao.gif'
   }
 ];
 

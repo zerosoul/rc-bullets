@@ -1,7 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import BulletScreen from 'rc-bullets';
+import {
+  Button,
+  InputLabel,
+  TextField,
+  Select,
+  MenuItem,
+  Popper,
+  IconButton,
+  Paper,
+  Grid
+} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import { Settings } from '@material-ui/icons';
 import BulletsScreen from './Screen';
 import {
   getRandomTheme,
@@ -11,41 +24,20 @@ import {
   heads,
   getRandomHead
 } from '../helper';
-
+const useStyles = makeStyles(theme => ({
+  root: {
+    padding: theme.spacing(3, 2),
+    marginBottom: theme.spacing(2)
+  }
+}));
 const StyledWrapper = styled.section`
   .opts {
-    z-index: 9999;
+    z-index: 999;
     position: fixed;
     width: 100%;
     bottom: 0;
-    padding: 2rem 4rem;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    .input,
-    .sendBtn,
-    .dur,
-    .img {
-      border-radius: 0.5rem;
-      border: 1px solid #333;
-    }
-    .input,
-    .dur,
-    .img,
-    .theme {
-      padding: 0.5rem 0.8rem;
-      margin: 0 1rem;
-    }
-    .sendBtn {
-      cursor: pointer;
-      text-transform: uppercase;
-      color: #fff;
-      background: rgba(2, 2, 2, 0.4);
-      font-size: 1.5rem;
-      font-weight: bold;
-      padding: 0.4rem 0.6rem;
-      border: 2px solid #fff;
-    }
+    background: rgba(2, 2, 2, 0.2);
+    padding: 1rem 0;
     .demo {
       text-transform: uppercase;
       padding: 4px 8px;
@@ -57,6 +49,12 @@ const StyledWrapper = styled.section`
     }
   }
 `;
+const StyledAvator = styled.img`
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  border: 1px solid #fff;
+`;
 export default function Dashboard() {
   const [currScreen, setCurrScreen] = useState(null);
   const [bullet, setBullet] = useState('');
@@ -64,6 +62,12 @@ export default function Dashboard() {
   const [animateFun, setAnimateFun] = useState('random');
   const [duration, setDuration] = useState(20);
   const [img, setImg] = useState('random');
+  const [paramsOpen, setParamsOpen] = useState(false);
+  const popperAnchorEl = useRef(null);
+  const classes = useStyles();
+  const togglePopper = () => {
+    setParamsOpen(prev => !prev);
+  };
   useEffect(() => {
     let tmp = new BulletScreen('.screen');
     setCurrScreen(tmp);
@@ -128,58 +132,112 @@ export default function Dashboard() {
   return (
     <StyledWrapper>
       <BulletsScreen screen={currScreen} />
-      <Link className="demo" target="_blank" to="/preview">
+      {/* <Link className="demo" target="_blank" to="/preview">
         preview
-      </Link>
+      </Link> */}
       <div className="opts">
-        <select className="img" value={img} onChange={handleImgSelect}>
-          <option value="random">头像(默认随机)</option>
-          {heads.map(head => {
-            const { title, path } = head;
-            return (
-              <option key={path} value={path}>
-                {title}
-              </option>
-            );
-          })}
-        </select>
-        <select className="theme" value={theme} onChange={handleThemeSelect}>
-          <option value="random">主题色(默认随机)</option>
-          {Object.keys(themes).map(key => {
-            return (
-              <option key={key} value={key}>
-                {themes[key].title}
-              </option>
-            );
-          })}
-        </select>
-        <select className="animateFun" value={animateFun} onChange={handleAnimateFunSelect}>
-          <option value="random">运动函数(默认随机)</option>
-          {Object.keys(animateFuns).map(key => {
-            return (
-              <option key={key} value={key}>
-                {animateFuns[key].title}
-              </option>
-            );
-          })}
-        </select>
-        <input
-          className="dur"
-          value={duration}
-          onChange={handleDurChange}
-          type="number"
-          placeholder="时长（秒）"
-        />
-        <textarea
-          rows="4"
-          className="input"
-          value={bullet}
-          onChange={handleInput}
-          placeholder="输入弹幕内容"
-        />
-        <button className="sendBtn" onClick={handleSend}>
-          发送弹幕
-        </button>
+        <Popper anchorEl={popperAnchorEl.current} open={paramsOpen} placement="top-start">
+          <Paper className={classes.root}>
+            <Grid direction="column" container spacing={1}>
+              <Grid item>
+                <InputLabel shrink id="img-label">
+                  头像
+                </InputLabel>
+                <Select labelId="img-label" value={img} onChange={handleImgSelect}>
+                  <MenuItem value="random">
+                    <em>随机</em>
+                  </MenuItem>
+                  {heads.map(head => {
+                    const { title, path } = head;
+                    return (
+                      <MenuItem key={path} value={path}>
+                        <StyledAvator src={path} alt={title} />
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </Grid>
+              <Grid item>
+                <InputLabel shrink id="theme-label">
+                  主题色
+                </InputLabel>
+
+                <Select labelId="theme-label" value={theme} onChange={handleThemeSelect}>
+                  <MenuItem value="random">
+                    <em>随机</em>
+                  </MenuItem>
+                  {Object.keys(themes).map(key => {
+                    return (
+                      <MenuItem key={key} value={key}>
+                        <span
+                          style={{
+                            width: '100%',
+                            padding: '.2rem',
+                            fontSize: '.6rem',
+                            color: themes[key].color,
+                            background: themes[key].bgColor
+                          }}
+                          title={themes[key].title}
+                        >
+                          {themes[key].title}
+                        </span>
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </Grid>
+              <Grid item>
+                <InputLabel shrink id="animate-fun-label">
+                  运动函数
+                </InputLabel>
+
+                <Select labelId="animate-fun" value={animateFun} onChange={handleAnimateFunSelect}>
+                  <MenuItem value="random">
+                    <em>随机</em>
+                  </MenuItem>
+                  {Object.keys(animateFuns).map(key => {
+                    return (
+                      <MenuItem key={key} value={key}>
+                        {animateFuns[key].title}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </Grid>
+              <Grid item>
+                <TextField
+                  label="时长/秒"
+                  type="number"
+                  value={duration}
+                  onChange={handleDurChange}
+                />
+              </Grid>
+            </Grid>
+          </Paper>
+        </Popper>
+        <Grid container spacing={2} alignItems="center" justify="center">
+          <Grid item>
+            <IconButton ref={popperAnchorEl} onClick={togglePopper}>
+              <Settings />
+            </IconButton>
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              value={bullet}
+              label="弹幕内容"
+              fullWidth
+              multiline
+              placeholder="请输入弹幕内容"
+              variant="outlined"
+              onChange={handleInput}
+            />
+          </Grid>
+          <Grid item>
+            <Button variant="contained" color="primary" className="sendBtn" onClick={handleSend}>
+              发送弹幕
+            </Button>
+          </Grid>
+        </Grid>
       </div>
     </StyledWrapper>
   );
