@@ -1,19 +1,18 @@
 {
   "files": {
-    "main.js": "/rc-bullets/static/js/main.151f7260.chunk.js",
-    "main.js.map": "/rc-bullets/static/js/main.151f7260.chunk.js.map",
+    "main.js": "/rc-bullets/static/js/main.f3263b50.chunk.js",
+    "main.js.map": "/rc-bullets/static/js/main.f3263b50.chunk.js.map",
     "runtime-main.js": "/rc-bullets/static/js/runtime-main.0cd9117e.js",
     "runtime-main.js.map": "/rc-bullets/static/js/runtime-main.0cd9117e.js.map",
-    "static/js/2.5c7b9310.chunk.js": "/rc-bullets/static/js/2.5c7b9310.chunk.js",
-    "static/js/2.5c7b9310.chunk.js.map": "/rc-bullets/static/js/2.5c7b9310.chunk.js.map",
+    "static/js/2.2cacb652.chunk.js": "/rc-bullets/static/js/2.2cacb652.chunk.js",
+    "static/js/2.2cacb652.chunk.js.map": "/rc-bullets/static/js/2.2cacb652.chunk.js.map",
     "index.html": "/rc-bullets/index.html",
-    "precache-manifest.4360ab1e61d7988a19bfd62a4522db54.js": "/rc-bullets/precache-manifest.4360ab1e61d7988a19bfd62a4522db54.js",
-    "service-worker.js": "/rc-bullets/service-worker.js",
-    "static/media/avator.jpg": "/rc-bullets/static/media/avator.83885266.jpg"
+    "precache-manifest.4f622df7e41abf8b5a1b56e72890119d.js": "/rc-bullets/precache-manifest.4f622df7e41abf8b5a1b56e72890119d.js",
+    "service-worker.js": "/rc-bullets/service-worker.js"
   },
   "entrypoints": [
     "static/js/runtime-main.0cd9117e.js",
-    "static/js/2.5c7b9310.chunk.js",
-    "static/js/main.151f7260.chunk.js"
+    "static/js/2.2cacb652.chunk.js",
+    "static/js/main.f3263b50.chunk.js"
   ]
 }
