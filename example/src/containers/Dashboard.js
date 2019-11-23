@@ -11,7 +11,8 @@ import {
   Popper,
   IconButton,
   Paper,
-  Grid
+  Grid,
+  Avatar
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Settings, Close } from '@material-ui/icons';
@@ -36,24 +37,10 @@ const StyledWrapper = styled.section`
     position: fixed;
     width: 100%;
     bottom: 0;
+    left: 0;
     background: rgba(2, 2, 2, 0.2);
     padding: 1rem 0;
-    .demo {
-      text-transform: uppercase;
-      padding: 4px 8px;
-      font-size: 1.5rem;
-      font-weight: 800;
-      position: absolute;
-      top: 5px;
-      right: 5px;
-    }
   }
-`;
-const StyledAvator = styled.img`
-  width: 1.4rem;
-  height: 1.4rem;
-  border-radius: 50%;
-  border: 1px solid #fff;
 `;
 export default function Dashboard() {
   const [currScreen, setCurrScreen] = useState(null);
@@ -151,7 +138,7 @@ export default function Dashboard() {
                     const { title, path } = head;
                     return (
                       <MenuItem key={path} value={path}>
-                        <StyledAvator src={path} alt={title} />
+                        <Avatar src={path} alt={title} />
                       </MenuItem>
                     );
                   })}
