@@ -14,7 +14,7 @@ import {
   Grid
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { Settings } from '@material-ui/icons';
+import { Settings, Close } from '@material-ui/icons';
 import BulletsScreen from './Screen';
 import {
   getRandomTheme,
@@ -27,7 +27,7 @@ import {
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(3, 2),
-    marginBottom: theme.spacing(2)
+    marginBottom: theme.spacing(3)
   }
 }));
 const StyledWrapper = styled.section`
@@ -218,7 +218,7 @@ export default function Dashboard() {
         <Grid container spacing={2} alignItems="center" justify="center">
           <Grid item>
             <IconButton ref={popperAnchorEl} onClick={togglePopper}>
-              <Settings color="secondary" />
+              {paramsOpen ? <Close color="secondary" /> : <Settings color="secondary" />}
             </IconButton>
           </Grid>
           <Grid item xs={6}>
