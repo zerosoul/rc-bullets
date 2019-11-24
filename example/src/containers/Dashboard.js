@@ -12,7 +12,8 @@ import {
   IconButton,
   Paper,
   Grid,
-  Avatar
+  Avatar,
+  Tooltip
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Settings, Close } from '@material-ui/icons';
@@ -78,15 +79,17 @@ export default function Dashboard() {
         animateTimeFun: currAnimateKey,
         txt: bullet,
         duration,
-        img: currImg,
+        head: currImg,
         color,
         bgColor,
         ts: new Date().getTime()
       };
       console.log({ obj });
 
-      const { txt, img: newImg, ...opts } = obj;
-      currScreen.push(<StyledBullet msg={txt} head={newImg} />, { ...opts });
+      const { txt, head, ...opts } = obj;
+      currScreen.push(<StyledBullet msg={txt} head={head} color={color} bgColor={bgColor} />, {
+        ...opts
+      });
       // currScreen.push({ msg: txt, head: newImg }, { ...opts });
       // send by localStorage
       let newV = JSON.stringify(obj);
@@ -204,9 +207,11 @@ export default function Dashboard() {
         </Popper>
         <Grid container spacing={2} alignItems="center" justify="center">
           <Grid item>
-            <IconButton ref={popperAnchorEl} onClick={togglePopper}>
-              {paramsOpen ? <Close color="secondary" /> : <Settings color="secondary" />}
-            </IconButton>
+            <Tooltip placement="left" title={paramsOpen ? '关闭设置' : '设置'} arrow>
+              <IconButton ref={popperAnchorEl} onClick={togglePopper}>
+                {paramsOpen ? <Close color="secondary" /> : <Settings color="secondary" />}
+              </IconButton>
+            </Tooltip>
           </Grid>
           <Grid item xs={6}>
             <TextField

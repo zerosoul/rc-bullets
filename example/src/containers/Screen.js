@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IconButton } from '@material-ui/core';
+import { IconButton, Tooltip } from '@material-ui/core';
 import {
   RotateLeft,
   PlayCircleFilledWhite,
@@ -35,19 +35,25 @@ export default function ScreenPage({ screen }) {
   return (
     <>
       <aside style={{ position: 'fixed', left: 0, top: 0, zIndex: 999 }}>
-        <IconButton onClick={handleClear}>
-          <RotateLeft color="error"></RotateLeft>
-        </IconButton>
-        <IconButton onClick={handleVisible}>
-          {visible ? <VisibilityOff color="secondary" /> : <Visibility color="secondary" />}
-        </IconButton>
-        <IconButton onClick={handleAnimateState}>
-          {paused ? (
-            <PlayCircleFilledWhite color="secondary" />
-          ) : (
-            <PauseCircleFilled color="secondary" />
-          )}
-        </IconButton>
+        <Tooltip title="清屏" arrow>
+          <IconButton onClick={handleClear}>
+            <RotateLeft color="error"></RotateLeft>
+          </IconButton>
+        </Tooltip>
+        <Tooltip title={visible ? '隐藏' : '显示'} arrow>
+          <IconButton onClick={handleVisible}>
+            {visible ? <VisibilityOff color="secondary" /> : <Visibility color="secondary" />}
+          </IconButton>
+        </Tooltip>
+        <Tooltip title={paused ? '开始' : '暂停'} arrow>
+          <IconButton onClick={handleAnimateState}>
+            {paused ? (
+              <PlayCircleFilledWhite color="secondary" />
+            ) : (
+              <PauseCircleFilled color="secondary" />
+            )}
+          </IconButton>
+        </Tooltip>
       </aside>
       <section style={{ height: '100vh' }} className="screen"></section>
     </>
