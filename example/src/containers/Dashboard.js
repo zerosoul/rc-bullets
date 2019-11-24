@@ -26,6 +26,7 @@ import {
   heads,
   getRandomHead
 } from '../helper';
+import GithubLink from '../components/GithubLink';
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(3, 2),
@@ -124,6 +125,7 @@ export default function Dashboard() {
 
   return (
     <StyledWrapper>
+      <GithubLink />
       <BulletsScreen screen={currScreen} />
       {/* <Link className="demo" target="_blank" to="/preview">
         preview
@@ -212,7 +214,7 @@ export default function Dashboard() {
           <Grid item>
             <Tooltip placement="left" title={paramsOpen ? '关闭设置' : '设置'} arrow>
               <IconButton ref={popperAnchorEl} onClick={togglePopper}>
-                {paramsOpen ? <Close color="secondary" /> : <Settings color="secondary" />}
+                {paramsOpen ? <Close color="primary" /> : <Settings color="primary" />}
               </IconButton>
             </Tooltip>
           </Grid>
