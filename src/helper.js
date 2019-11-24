@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 // const BounceIn = `
 // @keyframes BounceIn {
 //   from,
@@ -69,20 +69,5 @@ const isPlainObject = val => {
   }
   return typeof val === 'function' || typeof val === 'object';
 };
-const getMsgNode = item => {
-  if (isPlainObject(item)) {
-    const { msg, img } = item;
-    return (
-      <>
-        {img && (
-          <p className="head">
-            <img src={img} alt="msg head" />
-          </p>
-        )}
-        <p className="msg">{msg}</p>
-      </>
-    );
-  }
-  throw Error('Invalid params');
-};
-export { initBulletAnimate, getMsgNode };
+
+export { initBulletAnimate, isPlainObject };

@@ -1,6 +1,7 @@
+import React from 'react';
 import styled from 'styled-components';
 
-const StyledBullet = styled.div`
+const StyledWrapper = styled.div`
   padding: 8px 18px;
   border: 2px solid #fff;
   border-radius: 26px;
@@ -41,4 +42,16 @@ const StyledBullet = styled.div`
     }
   }
 `;
+const StyledBullet = ({ msg, head, color, bgColor }) => {
+  return (
+    <StyledWrapper color={color} bgColor={bgColor}>
+      {head && (
+        <p className="head">
+          <img src={head} alt="msg head" />
+        </p>
+      )}
+      <p className="msg">{msg}</p>
+    </StyledWrapper>
+  );
+};
 export default StyledBullet;

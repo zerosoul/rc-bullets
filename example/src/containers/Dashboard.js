@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 // import { Link } from 'react-router-dom';
-import BulletScreen from 'rc-bullets';
+import BulletScreen, { StyledBullet } from 'rc-bullets';
 import {
   Button,
   InputLabel,
@@ -86,8 +86,8 @@ export default function Dashboard() {
       console.log({ obj });
 
       const { txt, img: newImg, ...opts } = obj;
-      // const newValue = img ? { msg: txt, img: newImg } : txt;
-      currScreen.push({ msg: txt, img: newImg }, { ...opts });
+      currScreen.push(<StyledBullet msg={txt} head={newImg} />, { ...opts });
+      // currScreen.push({ msg: txt, head: newImg }, { ...opts });
       // send by localStorage
       let newV = JSON.stringify(obj);
       console.log({ newV });
