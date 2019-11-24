@@ -38,21 +38,6 @@ export default class BulletScreen {
     }
     // 插入css animation
     initBulletAnimate(this.target);
-    // 窗口隐藏事件处理
-    document.addEventListener(
-      'visibilitychange',
-      () => {
-        if (document.hidden) {
-          console.log('window hide');
-
-          this.pause();
-        } else {
-          console.log('window show');
-          this.resume();
-        }
-      },
-      false
-    );
   }
   push(item, opts = defaultOpts) {
     const {

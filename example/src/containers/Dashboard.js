@@ -16,7 +16,7 @@ import {
   Tooltip
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { Settings, Close } from '@material-ui/icons';
+import { Settings, Close, Send } from '@material-ui/icons';
 import BulletsScreen from './Screen';
 import {
   getRandomTheme,
@@ -56,6 +56,7 @@ export default function Dashboard() {
   const togglePopper = () => {
     setParamsOpen(prev => !prev);
   };
+
   useEffect(() => {
     let tmp = new BulletScreen('.screen');
     setCurrScreen(tmp);
@@ -76,6 +77,7 @@ export default function Dashboard() {
       let currImg = img === 'random' ? getRandomHead() : img;
       let { color, bgColor } = themes[currThemeKey];
       let obj = {
+        loopCount: 'infinite',
         animateTimeFun: currAnimateKey,
         txt: bullet,
         duration,
@@ -99,6 +101,7 @@ export default function Dashboard() {
       setBullet('');
     }
   };
+
   const handleImgSelect = ({ target: { value } }) => {
     console.log({ value });
     setImg(value);
@@ -219,13 +222,13 @@ export default function Dashboard() {
               label="弹幕内容"
               fullWidth
               multiline
-              placeholder="请输入弹幕内容"
+              placeholder="请输入内容"
               variant="outlined"
               onChange={handleInput}
             />
           </Grid>
           <Grid item>
-            <Button variant="contained" color="primary" className="sendBtn" onClick={handleSend}>
+            <Button endIcon={<Send />} variant="contained" color="primary" onClick={handleSend}>
               发送弹幕
             </Button>
           </Grid>
