@@ -61,7 +61,7 @@ export default function Demo() {
 
 - 支持传入 React 组件，灵活控制弹幕内容和 UI，提供一个默认样式组件：`<StyledBullet/>`
 - 弹幕屏幕管理：清屏，暂停，隐藏（后续可能会加入针对单个弹幕的控制）
-- 弹幕动画参数化：运动函数（匀速/ease/步进/cubic-bezier）、时长（秒）等
+- 弹幕动画参数化：运动函数（匀速/ease/步进/cubic-bezier）、时长（秒）、循环次数等
 - 鼠标悬浮弹幕暂停
 
 ## 常用 API
@@ -74,6 +74,10 @@ export default function Demo() {
 - 隐藏弹幕（滚动继续）：`screen.hide()`
 - 显示弹幕：`screen.show()`
 - 自带的一个弹幕样式组件：`<StyledBullet msg="弹幕内容" head="头像地址|组件" color="字体颜色" bgColor="背景色">`
+
+## TO DO
+
+- `useBulletScreen`
 
 ## License
 

@@ -13,7 +13,9 @@ import {
   Paper,
   Grid,
   Avatar,
-  Tooltip
+  Tooltip,
+  FormControlLabel,
+  Checkbox
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Settings, Close, Send } from '@material-ui/icons';
@@ -35,7 +37,7 @@ const useStyles = makeStyles(theme => ({
 }));
 const StyledWrapper = styled.section`
   .opts {
-    z-index: 999;
+    z-index: 9999;
     position: fixed;
     width: 100%;
     bottom: 0;
@@ -50,6 +52,8 @@ export default function Dashboard() {
   const [theme, setTheme] = useState('random');
   const [animateFun, setAnimateFun] = useState('random');
   const [duration, setDuration] = useState(20);
+  const [loopCount, setLoopCount] = useState(3);
+  const [isInfinite, setIsInfinite] = useState(false);
   const [img, setImg] = useState('random');
   const [paramsOpen, setParamsOpen] = useState(false);
   const popperAnchorEl = useRef(null);
@@ -78,7 +82,7 @@ export default function Dashboard() {
       let currImg = img === 'random' ? getRandomHead() : img;
       let { color, bgColor } = themes[currThemeKey];
       let obj = {
-        loopCount: 'infinite',
+        loopCount: isInfinite ? 'infinite' : loopCount,
         animateTimeFun: currAnimateKey,
         txt: bullet,
         duration,
@@ -123,6 +127,17 @@ export default function Dashboard() {
     setDuration(value);
   };
 
+  const handleLoopCountChange = ({ target: { value } }) => {
+    console.log({ value });
+
+    setLoopCount(value);
+  };
+  const handleInfiniteChange = ({ target: { value } }) => {
+    console.log({ value });
+
+    setIsInfinite(prev => !prev);
+  };
+
   return (
     <StyledWrapper>
       <GithubLink />
@@ -133,8 +148,8 @@ export default function Dashboard() {
       <div className="opts">
         <Popper anchorEl={popperAnchorEl.current} open={paramsOpen} placement="top-start">
           <Paper className={classes.root}>
-            <Grid direction="column" container spacing={1}>
-              <Grid item>
+            <Grid container spacing={2}>
+              <Grid item xs={6}>
                 <InputLabel shrink id="img-label">
                   头像
                 </InputLabel>
@@ -152,7 +167,7 @@ export default function Dashboard() {
                   })}
                 </Select>
               </Grid>
-              <Grid item>
+              <Grid item xs={6}>
                 <InputLabel shrink id="theme-label">
                   主题色
                 </InputLabel>
@@ -181,7 +196,9 @@ export default function Dashboard() {
                   })}
                 </Select>
               </Grid>
-              <Grid item>
+            </Grid>
+            <Grid container spacing={2}>
+              <Grid item xs={6}>
                 <InputLabel shrink id="animate-fun-label">
                   运动函数
                 </InputLabel>
@@ -199,12 +216,42 @@ export default function Dashboard() {
                   })}
                 </Select>
               </Grid>
-              <Grid item>
+              <Grid item xs={6}>
                 <TextField
+                  InputProps={{
+                    inputProps: { min: 1 }
+                  }}
                   label="时长/秒"
                   type="number"
                   value={duration}
                   onChange={handleDurChange}
+                />
+              </Grid>
+            </Grid>
+            <Grid container spacing={2}>
+              <Grid item xs={6}>
+                <TextField
+                  disabled={isInfinite}
+                  InputProps={{
+                    inputProps: { min: 1 }
+                  }}
+                  label="循环次数"
+                  type="number"
+                  value={isInfinite ? 9999 : loopCount}
+                  onChange={handleLoopCountChange}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={isInfinite}
+                      onChange={handleInfiniteChange}
+                      value="infinite"
+                      color="secondary"
+                    />
+                  }
+                  label="无限循环"
                 />
               </Grid>
             </Grid>
