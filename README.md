@@ -66,14 +66,14 @@ export default function Demo() {
 
 ## 常用 API
 
-- 初始化弹幕屏幕：`const screen = BulletScreen(queryString|HTMLElement)`
-- 发送弹幕：`screen.push(string|ReactElement)`
+- 初始化弹幕屏幕：`const screen = BulletScreen(<queryString>|<HTMLElement>)`
+- 发送弹幕：`screen.push(<string>|<ReactElement>)`
 - 弹幕清屏：`screen.clear()`
 - 暂停弹幕：`screen.pause()`
 - 弹幕继续：`screen.resume()`
 - 隐藏弹幕（滚动继续）：`screen.hide()`
 - 显示弹幕：`screen.show()`
-- 自带的一个弹幕样式组件：`<StyledBullet msg="弹幕内容" head="头像地址|组件" color="字体颜色" bgColor="背景色">`
+- 自带的一个弹幕样式组件：`<StyledBullet msg="<弹幕内容>" head="<头像地址>" color="<字体颜色>" bgColor="<背景色>">`
 
 ## TO DO
 
