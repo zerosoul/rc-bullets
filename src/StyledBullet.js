@@ -8,6 +8,8 @@ const StyledWrapper = styled.div`
   background-color: ${({ bgColor }) => bgColor};
   position: relative;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  word-break: keep-all;
+  white-space: pre-wrap;
   .msg {
     font-size: 22px;
     line-height: 1.4;
