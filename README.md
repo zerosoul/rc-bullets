@@ -20,7 +20,7 @@ npm install --save rc-bullets
 
 ```jsx
 import React, { useEffect, useState } from 'react';
-import BulletScreen,{StyledBullet} from 'rc-bullets';
+import BulletScreen, { StyledBullet } from 'rc-bullets';
 export default function Demo() {
   // 弹幕屏幕
   const [screen, setScreen] = useState(null);
@@ -44,15 +44,15 @@ export default function Demo() {
       screen.push(bullet);
       // or 使用 StyledBullet
 
-      screen.push(<StyledBullet msg={bullet}>);
+      screen.push(<StyledBullet msg={bullet} />);
     }
   };
   return (
-    <>
+    <main>
       <div className="screen" style={{ width: '100vw', height: '80vh' }}></div>
       <input value={bullet} onChange={handleChange} />
       <button onClick={handleSend}>发送</button>
-    </>
+    </main>
   );
 }
 ```
