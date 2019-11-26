@@ -10,4 +10,6 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Deploy to github pages
-      run: npm run deploy
+      run: |
+      npm run prepare
+      npm run deploy
