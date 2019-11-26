@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v1
       - name: Deploy to github pages
         env:
-          GITHUB_TOKEN: ${{secrets.DEPLOY_SECRET}}
+          GH_TOKEN: ${{secrets.DEPLOY_SECRET}}
         run: |
           npm install
           npm run prepare
