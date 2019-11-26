@@ -10,5 +10,6 @@ jobs:
       - uses: actions/checkout@v1
       - name: Deploy to github pages
         run: |
+          npm install
           npm run prepare
           npm run deploy
