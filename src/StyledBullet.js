@@ -47,11 +47,11 @@ const StyledBullet = ({ msg, head, color, bgColor }) => {
   return (
     <StyledWrapper color={color} bgColor={bgColor}>
       {head && (
-        <p className="head">
+        <div className="head">
           <img src={head} alt="msg head" />
-        </p>
+        </div>
       )}
-      <p className="msg">{msg}</p>
+      <div className="msg">{msg}</div>
     </StyledWrapper>
   );
 };
