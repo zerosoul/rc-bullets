@@ -1,15 +1,14 @@
-name: CI
+name: Deploy to github pages
 
 on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Deploy to github pages
-      run: |
-      npm run prepare
-      npm run deploy
+      - uses: actions/checkout@v1
+      - name: Deploy to github pages
+        run: |
+          npm run prepare
+          npm run deploy
