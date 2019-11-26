@@ -6,12 +6,8 @@ const StyledWrapper = styled.div`
   border: 2px solid #fff;
   border-radius: 26px;
   background-color: ${({ bgColor }) => bgColor};
-  max-width: 60vw;
   position: relative;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  @media (min-width: 768px) {
-    max-width: none;
-  }
   .msg {
     font-size: 22px;
     line-height: 1.4;
