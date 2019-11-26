@@ -44,7 +44,12 @@ export default function Demo() {
       screen.push(bullet);
       // or 使用 StyledBullet
 
-      screen.push(<StyledBullet msg={bullet} />);
+      screen.push(
+        <StyledBullet
+          head="https://zerosoul.github.io/rc-bullets/assets/img/heads/girl.jpg"
+          msg={bullet}
+        />
+      );
     }
   };
   return (
