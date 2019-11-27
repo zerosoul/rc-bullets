@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@master
       - name: Deploy to github pages
         env:
           GH_TOKEN: ${{secrets.DEPLOY_SECRET}}

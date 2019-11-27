@@ -69,5 +69,69 @@ const isPlainObject = val => {
   }
   return typeof val === 'function' || typeof val === 'object';
 };
+const getContainer = opts => {
+  const {
+    pause,
+    hide,
+    zIndex,
+    pauseOnHover,
+    animate,
+    loopCount,
+    direction,
+    delay,
+    duration,
+    animateTimeFun
+  } = opts;
+  // 创建单条弹幕的容器
+  const bulletContainer = document.createElement('div');
+  bulletContainer.id = Math.random()
+    .toString(36)
+    .substring(2);
 
-export { initBulletAnimate, isPlainObject };
+  // 设置弹幕容器的初始样式
+  bulletContainer.style.transitionProperty = 'opacity';
+  bulletContainer.style.transitionDuration = '1s';
+  bulletContainer.style.cursor = 'pointer';
+  bulletContainer.style.position = 'absolute';
+  bulletContainer.style.left = 0;
+  bulletContainer.style.zIndex = zIndex;
+  bulletContainer.style.visibility = 'hidden';
+  bulletContainer.style.animationName = animate;
+  bulletContainer.style.animationIterationCount = loopCount;
+  bulletContainer.style.animationDelay = isNaN(delay) ? delay : `${delay}s`;
+  bulletContainer.style.animationDirection = direction;
+  bulletContainer.style.animationDuration = isNaN(duration) ? duration : `${duration}s`;
+  bulletContainer.style.animationTimingFunction = animateTimeFun;
+
+  // 性能小优化
+  bulletContainer.style.willChange = 'transform';
+  // 隐藏
+  if (hide) {
+    bulletContainer.style.opacity = 0;
+  }
+  // pause on hover
+  if (pauseOnHover) {
+    bulletContainer.addEventListener(
+      'mouseenter',
+      () => {
+        console.log('enter');
+
+        bulletContainer.style.animationPlayState = 'paused';
+      },
+      false
+    );
+    bulletContainer.addEventListener(
+      'mouseleave',
+      () => {
+        console.log('leave');
+        if (!pause) {
+          bulletContainer.style.animationPlayState = 'running';
+        }
+      },
+      false
+    );
+  }
+  return bulletContainer;
+};
+
+export { initBulletAnimate, isPlainObject, getContainer };
