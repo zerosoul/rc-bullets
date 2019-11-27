@@ -8,6 +8,8 @@ const defaultOpts = {
   pauseOnHover: true,
   loopCount: 1,
   duration: 10,
+  delay: 0,
+  direction: 'normal',
   color: '#fff',
   bgColor: 'rgba(2,2,2,.4)',
   animateTimeFun: 'linear'
@@ -44,10 +46,10 @@ export default class BulletScreen {
       animate,
       duration,
       loopCount,
+      delay,
+      direction,
       animateTimeFun,
-      pauseOnHover,
-      color,
-      bgColor
+      pauseOnHover
     } = Object.assign(defaultOpts, opts);
     // 实时获取屏幕的宽高
     const { height: screenHeight } = this.target.getBoundingClientRect();
@@ -67,7 +69,9 @@ export default class BulletScreen {
     bulletContainer.style.visibility = 'hidden';
     bulletContainer.style.animationName = animate;
     bulletContainer.style.animationIterationCount = loopCount;
-    bulletContainer.style.animationDuration = `${duration}s`;
+    bulletContainer.style.animationDelay = isNaN(delay) ? delay : `${delay}s`;
+    bulletContainer.style.animationDirection = direction;
+    bulletContainer.style.animationDuration = isNaN(duration) ? duration : `${duration}s`;
     bulletContainer.style.animationTimingFunction = animateTimeFun;
 
     // 性能小优化
@@ -102,7 +106,7 @@ export default class BulletScreen {
       React.isValidElement(item) || typeof item === 'string' ? (
         item
       ) : isPlainObject(item) ? (
-        <StyledBullet color={color} bgColor={bgColor} {...item}></StyledBullet>
+        <StyledBullet {...item}></StyledBullet>
       ) : null,
       bulletContainer,
       () => {
