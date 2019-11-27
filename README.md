@@ -21,6 +21,8 @@ npm install --save rc-bullets
 ```jsx
 import React, { useEffect, useState } from 'react';
 import BulletScreen, { StyledBullet } from 'rc-bullets';
+
+const headUrl='https://zerosoul.github.io/rc-bullets/assets/img/heads/girl.jpg';
 export default function Demo() {
   // 弹幕屏幕
   const [screen, setScreen] = useState(null);
@@ -40,16 +42,18 @@ export default function Demo() {
   // 发送弹幕
   const handleSend = () => {
     if (bullet) {
-      // push
+      // push 纯文本
       screen.push(bullet);
       // or 使用 StyledBullet
 
       screen.push(
         <StyledBullet
-          head="https://zerosoul.github.io/rc-bullets/assets/img/heads/girl.jpg"
+          head={headUrl}
           msg={bullet}
         />
       );
+      // or 还可以这样使用，效果等同使用 StyledBullet 组件
+      screen.push({msg:bullet,head:headUrl,color:"#eee" bgColor:"rgba(2,2,2,.3)"})
     }
   };
   return (
@@ -66,13 +70,25 @@ export default function Demo() {
 
 - 支持传入 React 组件，灵活控制弹幕内容和 UI，并提供一个默认样式组件：`<StyledBullet/>`
 - 弹幕屏幕管理：清屏，暂停，隐藏（后续可能会加入针对单个弹幕的控制）
-- 弹幕动画参数化：运动函数（匀速/ease/步进/cubic-bezier）、时长（秒）、循环次数等
+- 弹幕动画参数化：运动函数（匀速/ease/步进/cubic-bezier）、时长（秒）、循环次数、延迟等
 - 鼠标悬浮弹幕暂停
 
 ## 常用 API
 
 - 初始化弹幕屏幕：`const screen = BulletScreen(<queryString>|<HTMLElement>)`
-- 发送弹幕：`screen.push(<string>|<ReactElement>)`
+- 发送弹幕：`screen.push(<string>|<ReactElement>,option)`
+
+`option`：
+
+| 选项           | 含义         | 值类型        | 默认值      | 备注                                                                                                                |
+| -------------- | ------------ | ------------- | ----------- | ------------------------------------------------------------------------------------------------------------------- |
+| pauseOnHover   | 鼠标悬停暂停 | boolean       | true        |                                                                                                                     |
+| loopCount      | 循环次数     | number/string | 1           | 值为‘infinite’时，表示无限循环                                                                                      |
+| duration       | 滚动时长     | number/string | 10          | 数字则单位为‘秒’，字符串则支持'10s'和'300ms'两种单位                                                                |
+| delay          | 延迟         | number/string | 0           | 数字则单位为‘秒’，字符串则支持'10s'和'300ms'两种单位                                                                | [animation-delay](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-delay)支持的所有值 |
+| direction      | 动画方向     | string        | normal      | [animation-direction](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-direction)支持的所有值             |
+| animateTimeFun | 动画函数     | string        | linear:匀速 | [animation-timing-function](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timing-function)支持的所有值 |
+
 - 弹幕清屏：`screen.clear()`
 - 暂停弹幕：`screen.pause()`
 - 弹幕继续：`screen.resume()`
