@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { initBulletAnimate, isPlainObject } from './helper';
+import { initBulletAnimate, isPlainObject, getContainer } from './helper';
 import StyledBullet from './StyledBullet';
 
 const defaultOpts = {
@@ -42,65 +42,20 @@ export default class BulletScreen {
     initBulletAnimate(this.target);
   }
   push(item, opts = defaultOpts) {
-    const {
-      animate,
-      duration,
-      loopCount,
-      delay,
-      direction,
-      animateTimeFun,
-      pauseOnHover
-    } = Object.assign(defaultOpts, opts);
-    // 实时获取屏幕的宽高
-    const { height: screenHeight } = this.target.getBoundingClientRect();
-    // 创建单条弹幕的容器
-    const bulletContainer = document.createElement('div');
-    bulletContainer.id = new Date().getTime();
+    const options = Object.assign(defaultOpts, opts);
+    const currCount = this.bullets.length;
+    const bulletContainer = getContainer({
+      ...options,
+      pause: this.allPaused,
+      hide: this.allHide,
+      zIndex: currCount + 10
+    });
     this.target.appendChild(bulletContainer);
     // 加入当前存在的弹幕列表
     this.bullets.push(bulletContainer);
-    // 设置弹幕容器的初始样式
-    bulletContainer.style.transitionProperty = 'opacity';
-    bulletContainer.style.transitionDuration = '1s';
-    bulletContainer.style.cursor = 'pointer';
-    bulletContainer.style.position = 'absolute';
-    bulletContainer.style.left = 0;
-    bulletContainer.style.zIndex = 9;
-    bulletContainer.style.visibility = 'hidden';
-    bulletContainer.style.animationName = animate;
-    bulletContainer.style.animationIterationCount = loopCount;
-    bulletContainer.style.animationDelay = isNaN(delay) ? delay : `${delay}s`;
-    bulletContainer.style.animationDirection = direction;
-    bulletContainer.style.animationDuration = isNaN(duration) ? duration : `${duration}s`;
-    bulletContainer.style.animationTimingFunction = animateTimeFun;
+    // 实时获取屏幕的宽高
+    const { height: screenHeight } = this.target.getBoundingClientRect();
 
-    // 性能小优化
-    bulletContainer.style.willChange = 'transform';
-    if (this.allHide) {
-      bulletContainer.style.opacity = 0;
-    }
-    // pause on hover
-    if (pauseOnHover) {
-      bulletContainer.addEventListener(
-        'mouseenter',
-        () => {
-          console.log('enter');
-
-          bulletContainer.style.animationPlayState = 'paused';
-        },
-        false
-      );
-      bulletContainer.addEventListener(
-        'mouseleave',
-        () => {
-          console.log('leave');
-          if (!this.allPaused) {
-            bulletContainer.style.animationPlayState = 'running';
-          }
-        },
-        false
-      );
-    }
     // 弹幕渲染进屏幕
     ReactDOM.render(
       React.isValidElement(item) || typeof item === 'string' ? (
@@ -156,5 +111,6 @@ export default class BulletScreen {
       ReactDOM.unmountComponentAtNode(item);
       item.remove();
     });
+    this.bullets = [];
   }
 }
