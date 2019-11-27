@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.js": "/rc-bullets/static/js/main.ce2c16ed.chunk.js",
-    "main.js.map": "/rc-bullets/static/js/main.ce2c16ed.chunk.js.map",
+    "main.js": "/rc-bullets/static/js/main.f5226edf.chunk.js",
+    "main.js.map": "/rc-bullets/static/js/main.f5226edf.chunk.js.map",
     "runtime-main.js": "/rc-bullets/static/js/runtime-main.437ac50e.js",
     "runtime-main.js.map": "/rc-bullets/static/js/runtime-main.437ac50e.js.map",
     "static/js/2.981e739e.chunk.js": "/rc-bullets/static/js/2.981e739e.chunk.js",
     "static/js/2.981e739e.chunk.js.map": "/rc-bullets/static/js/2.981e739e.chunk.js.map",
     "index.html": "/rc-bullets/index.html",
-    "precache-manifest.6d4e792c6b59cd7c2252bd5459e7bf1a.js": "/rc-bullets/precache-manifest.6d4e792c6b59cd7c2252bd5459e7bf1a.js",
+    "precache-manifest.583b8b7ee6369fb2b748e0a6ec81efbe.js": "/rc-bullets/precache-manifest.583b8b7ee6369fb2b748e0a6ec81efbe.js",
     "service-worker.js": "/rc-bullets/service-worker.js",
     "static/js/2.981e739e.chunk.js.LICENSE": "/rc-bullets/static/js/2.981e739e.chunk.js.LICENSE",
-    "static/js/main.ce2c16ed.chunk.js.LICENSE": "/rc-bullets/static/js/main.ce2c16ed.chunk.js.LICENSE"
+    "static/js/main.f5226edf.chunk.js.LICENSE": "/rc-bullets/static/js/main.f5226edf.chunk.js.LICENSE"
   },
   "entrypoints": [
     "static/js/runtime-main.437ac50e.js",
     "static/js/2.981e739e.chunk.js",
-    "static/js/main.ce2c16ed.chunk.js"
+    "static/js/main.f5226edf.chunk.js"
   ]
 }
