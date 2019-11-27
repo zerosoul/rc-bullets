@@ -12,6 +12,13 @@
     "node": ">=8",
     "npm": ">=5"
   },
+  "keywords": [
+    "弹幕",
+    "barrage",
+    "bullet",
+    "react",
+    "年会"
+  ],
   "scripts": {
     "build": "rollup -c",
     "start": "rollup -c -w",
@@ -46,6 +53,7 @@
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-peer-deps-external": "^2.2.0",
+    "rollup-plugin-terser": "^5.1.2",
     "rollup-plugin-url": "^3.0.0",
     "styled-components": "^4.4.1"
   },
