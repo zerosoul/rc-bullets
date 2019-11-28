@@ -6,7 +6,7 @@ import StyledBullet from './StyledBullet';
 const defaultOpts = {
   animate: 'RightToLeft',
   pauseOnHover: true,
-  pauseOnClick: true,
+  pauseOnClick: false,
   loopCount: 1,
   duration: 10,
   delay: 0,

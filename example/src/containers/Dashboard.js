@@ -285,14 +285,14 @@ export default function Dashboard() {
         <Grid container spacing={2} alignItems="center" justify="center">
           <Grid item>
             <Tooltip placement="bottom" title={mocking ? '停止模拟' : '开始模拟'} arrow>
-              <Fab color="primary" onClick={handleMocking}>
+              <Fab size="small" color="primary" onClick={handleMocking}>
                 {mocking ? <PauseCircleFilled /> : <PlayCircleFilled />}
               </Fab>
             </Tooltip>
           </Grid>
           <Grid item>
             <Tooltip placement="bottom" title={paramsOpen ? '关闭设置' : '设置'} arrow>
-              <Fab color="primary" ref={popperAnchorEl} onClick={togglePopper}>
+              <Fab size="small" color="primary" ref={popperAnchorEl} onClick={togglePopper}>
                 {paramsOpen ? <Close /> : <Settings />}
               </Fab>
             </Tooltip>
