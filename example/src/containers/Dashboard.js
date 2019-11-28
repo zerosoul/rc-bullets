@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
+import Mock from 'mockjs';
 // import { Link } from 'react-router-dom';
 import BulletScreen, { StyledBullet } from 'rc-bullets';
 import {
@@ -18,7 +19,7 @@ import {
   Checkbox
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { Settings, Close, Send } from '@material-ui/icons';
+import { Settings, Close, Send, PlayCircleFilled, PauseCircleFilled } from '@material-ui/icons';
 import BulletsScreen from './Screen';
 import {
   getRandomTheme,
@@ -37,7 +38,7 @@ const useStyles = makeStyles(theme => ({
 }));
 const StyledWrapper = styled.section`
   .opts {
-    z-index: 9999;
+    z-index: 998;
     position: fixed;
     width: 100%;
     bottom: 0;
@@ -46,8 +47,10 @@ const StyledWrapper = styled.section`
     padding: 1rem 0;
   }
 `;
+let mockingInter = 0;
 export default function Dashboard() {
   const [currScreen, setCurrScreen] = useState(null);
+  const [mocking, setMocking] = useState(false);
   const [bullet, setBullet] = useState('');
   const [theme, setTheme] = useState('random');
   const [animateFun, setAnimateFun] = useState('random');
@@ -70,6 +73,28 @@ export default function Dashboard() {
     console.log(value);
 
     setBullet(value);
+  };
+  const handleMocking = () => {
+    if (mocking) {
+      clearInterval(mockingInter);
+    } else {
+      mockingInter = setInterval(() => {
+        let currThemeKey = getRandomTheme();
+        let { color, bgColor } = themes[currThemeKey];
+        currScreen.push(
+          <StyledBullet
+            color={color}
+            bgColor={bgColor}
+            head={getRandomHead()}
+            msg={Mock.Random.csentence(3, 28)}
+          />,
+          {
+            duration: Math.random() * 50
+          }
+        );
+      }, 500);
+    }
+    setMocking(prev => !prev);
   };
   const handleSend = () => {
     console.log('current bullet', bullet);
@@ -259,7 +284,18 @@ export default function Dashboard() {
         </Popper>
         <Grid container spacing={2} alignItems="center" justify="center">
           <Grid item>
-            <Tooltip placement="left" title={paramsOpen ? '关闭设置' : '设置'} arrow>
+            <Tooltip placement="bottom" title={mocking ? '停止模拟' : '开始模拟'} arrow>
+              <IconButton onClick={handleMocking}>
+                {mocking ? (
+                  <PauseCircleFilled color="primary" />
+                ) : (
+                  <PlayCircleFilled color="primary" />
+                )}
+              </IconButton>
+            </Tooltip>
+          </Grid>
+          <Grid item>
+            <Tooltip placement="bottom" title={paramsOpen ? '关闭设置' : '设置'} arrow>
               <IconButton ref={popperAnchorEl} onClick={togglePopper}>
                 {paramsOpen ? <Close color="primary" /> : <Settings color="primary" />}
               </IconButton>
@@ -278,7 +314,7 @@ export default function Dashboard() {
           </Grid>
           <Grid item>
             <Button endIcon={<Send />} variant="contained" color="primary" onClick={handleSend}>
-              发送弹幕
+              发送
             </Button>
           </Grid>
         </Grid>
