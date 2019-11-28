@@ -10,13 +10,13 @@ import {
   Select,
   MenuItem,
   Popper,
-  IconButton,
   Paper,
   Grid,
   Avatar,
   Tooltip,
   FormControlLabel,
-  Checkbox
+  Checkbox,
+  Fab
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Settings, Close, Send, PlayCircleFilled, PauseCircleFilled } from '@material-ui/icons';
@@ -285,20 +285,16 @@ export default function Dashboard() {
         <Grid container spacing={2} alignItems="center" justify="center">
           <Grid item>
             <Tooltip placement="bottom" title={mocking ? '停止模拟' : '开始模拟'} arrow>
-              <IconButton onClick={handleMocking}>
-                {mocking ? (
-                  <PauseCircleFilled color="primary" />
-                ) : (
-                  <PlayCircleFilled color="primary" />
-                )}
-              </IconButton>
+              <Fab color="primary" onClick={handleMocking}>
+                {mocking ? <PauseCircleFilled /> : <PlayCircleFilled />}
+              </Fab>
             </Tooltip>
           </Grid>
           <Grid item>
             <Tooltip placement="bottom" title={paramsOpen ? '关闭设置' : '设置'} arrow>
-              <IconButton ref={popperAnchorEl} onClick={togglePopper}>
-                {paramsOpen ? <Close color="primary" /> : <Settings color="primary" />}
-              </IconButton>
+              <Fab color="primary" ref={popperAnchorEl} onClick={togglePopper}>
+                {paramsOpen ? <Close /> : <Settings />}
+              </Fab>
             </Tooltip>
           </Grid>
           <Grid item xs={6}>
