@@ -6,6 +6,7 @@ import StyledBullet from './StyledBullet';
 const defaultOpts = {
   animate: 'RightToLeft',
   pauseOnHover: true,
+  pauseOnClick: true,
   loopCount: 1,
   duration: 10,
   delay: 0,
@@ -81,18 +82,27 @@ export default class BulletScreen {
       ReactDOM.unmountComponentAtNode(bulletContainer);
       bulletContainer.remove();
     });
+
+    // 返回该容器的ID
+    return bulletContainer.id;
   }
-  pause() {
+  _toggleAnimateStatus = (id, status = 'paused') => {
+    const currItem = this.bullets.find(item => item.id == id);
+    if (currItem) {
+      currItem.style.animationPlayState = status;
+      return;
+    }
+
     this.allPaused = true;
     this.bullets.forEach(item => {
-      item.style.animationPlayState = 'paused';
+      item.style.animationPlayState = status;
     });
+  };
+  pause(id = null) {
+    this._toggleAnimateStatus(id, 'paused');
   }
-  resume() {
-    this.allPaused = false;
-    this.bullets.forEach(item => {
-      item.style.animationPlayState = 'running';
-    });
+  resume(id = null) {
+    this._toggleAnimateStatus(id, 'running');
   }
   hide() {
     this.allHide = true;
@@ -106,7 +116,16 @@ export default class BulletScreen {
       item.style.opacity = 1;
     });
   }
-  clear() {
+  clear(id = null) {
+    const currItem = this.bullets.find(item => item.id == id);
+    if (currItem) {
+      ReactDOM.unmountComponentAtNode(currItem);
+      currItem.remove();
+      this.bullets = this.bullets.filter(function(item) {
+        return item.id !== id;
+      });
+      return;
+    }
     this.bullets.forEach(item => {
       ReactDOM.unmountComponentAtNode(item);
       item.remove();

@@ -75,8 +75,8 @@ export default function Demo() {
 
 ## 常用 API
 
-- 初始化弹幕屏幕：`const screen = BulletScreen(<queryString>|<HTMLElement>)`
-- 发送弹幕：`screen.push(<string>|<ReactElement>,option)`
+- 初始化弹幕屏幕：`const screen = new BulletScreen(<queryString>|<HTMLElement>)`
+- 发送弹幕：`const bulletId = screen.push(<string>|<ReactElement>,option)`
 
 `option`：
 
@@ -89,9 +89,9 @@ export default function Demo() {
 | direction      | 动画方向     | string        | normal      | [animation-direction](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-direction)支持的所有值             |
 | animateTimeFun | 动画函数     | string        | linear:匀速 | [animation-timing-function](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timing-function)支持的所有值 |
 
-- 弹幕清屏：`screen.clear()`
-- 暂停弹幕：`screen.pause()`
-- 弹幕继续：`screen.resume()`
+- 弹幕清屏：`screen.clear([<bulletId>])`，无参则清除全部
+- 暂停弹幕：`screen.pause([<bulletId>])`，无参则暂停全部
+- 弹幕继续：`screen.resume([<bulletId>])`，无参则继续全部
 - 隐藏弹幕（滚动继续）：`screen.hide()`
 - 显示弹幕：`screen.show()`
 - 自带的一个弹幕样式组件：`<StyledBullet msg="<弹幕内容>" head="<头像地址>" color="<字体颜色>" bgColor="<背景色>">`

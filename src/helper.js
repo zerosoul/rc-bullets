@@ -75,6 +75,7 @@ const getContainer = opts => {
     hide,
     zIndex,
     pauseOnHover,
+    pauseOnClick,
     animate,
     loopCount,
     direction,
@@ -124,8 +125,26 @@ const getContainer = opts => {
       'mouseleave',
       () => {
         console.log('leave');
-        if (!pause) {
+        if (!pause && !bulletContainer.dataset.clicked) {
           bulletContainer.style.animationPlayState = 'running';
+        }
+      },
+      false
+    );
+  }
+  // pauseonClick
+  if (pauseOnClick) {
+    bulletContainer.addEventListener(
+      'click',
+      evt => {
+        console.log(evt);
+        let currStatus = bulletContainer.style.animationPlayState;
+        if (currStatus == 'paused' && bulletContainer.dataset.clicked) {
+          bulletContainer.dataset.clicked = '';
+          bulletContainer.style.animationPlayState = 'running';
+        } else {
+          bulletContainer.dataset.clicked = 'true';
+          bulletContainer.style.animationPlayState = 'paused';
         }
       },
       false
