@@ -24,39 +24,31 @@ const StyledWrapper = styled.section`
   }
 `;
 let mockingInter = 0;
+let currScreen = null;
 export default function Dashboard() {
-  const [currScreen, setCurrScreen] = useState(null);
-
   const [bullet, setBullet] = useState('');
 
   const popperAnchorEl = useRef(null);
-  const {
-    params,
-    states: { mocking, isInfinite, open },
-    toggleStates,
-    handleChange
-  } = useParams();
+  const { params, states, toggleStates, handleChange } = useParams();
+  const { mocking, isInfinite, open } = states;
   const { theme, loopCount, head, duration, animateFun } = params;
   useEffect(() => {
-    let tmp = new BulletScreen('.screen');
-    setCurrScreen(tmp);
+    currScreen = new BulletScreen('.screen');
   }, []);
   const handleInput = ({ target: { value } }) => {
     console.log(value);
 
     setBullet(value);
   };
-  const handleMocking = () => {
-    if (mocking) {
-      clearInterval(mockingInter);
-    } else {
+  const toggleSendMocking = () => {
+    console.log('handle mocking start', mocking);
+
+    if (!mocking) {
       mockingInter = setInterval(() => {
-        if (currScreen.allPaused) {
-          toggleStates('mocking')();
-          return;
-        }
         handleSend(Mock.Random.csentence(3, 28), Math.random() * 50);
       }, 500);
+    } else {
+      clearInterval(mockingInter);
     }
     toggleStates('mocking')();
   };
@@ -65,9 +57,9 @@ export default function Dashboard() {
 
     if (bullet || msg) {
       console.log('start send');
-      let currHead = head == 'random' ? getRandomHead() : head;
-      let currAnimteFun = animateFun == 'random' ? getRandomAniFun() : animateFun;
-      let themeKey = theme == 'random' ? getRandomTheme() : theme;
+      let currHead = head === 'random' ? getRandomHead() : head;
+      let currAnimteFun = animateFun === 'random' ? getRandomAniFun() : animateFun;
+      let themeKey = theme === 'random' ? getRandomTheme() : theme;
       let { color, bgColor } = themes[themeKey];
 
       currScreen.push(
@@ -106,7 +98,7 @@ export default function Dashboard() {
           open={open}
           toggleStates={toggleStates}
           popperAnchorEl={popperAnchorEl}
-          handleMocking={handleMocking}
+          handleMocking={toggleSendMocking}
           handleInput={handleInput}
           handleSend={handleSend}
         />

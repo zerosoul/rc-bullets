@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, TextField, Popper, Grid, Tooltip, Fab } from '@material-ui/core';
+import { Button, TextField, Grid, Tooltip, Fab } from '@material-ui/core';
 import { Settings, Close, Send, PlayCircleFilled, PauseCircleFilled } from '@material-ui/icons';
 export default function OptsArea({
   popperAnchorEl,

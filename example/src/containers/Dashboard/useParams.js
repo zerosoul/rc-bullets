@@ -1,12 +1,4 @@
 import { useState } from 'react';
-import {
-  getRandomTheme,
-  themes,
-  animateFuns,
-  getRandomAniFun,
-  heads,
-  getRandomHead
-} from '../../helper';
 
 const useParams = () => {
   const [params, setParams] = useState({
@@ -22,8 +14,15 @@ const useParams = () => {
     open: false
   });
   const toggleStates = prop => () => {
+    console.log('prev state', states[prop]);
+
     let newState = !states[prop];
-    setStates({ ...states, [prop]: newState });
+    setStates(prev => {
+      console.log('states prev', prev);
+      console.log('new state', newState);
+
+      return { ...prev, [prop]: newState };
+    });
   };
   const handleChange = prop => event => {
     setParams({ ...params, [prop]: event.target.value });
