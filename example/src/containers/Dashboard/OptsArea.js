@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, TextField, Grid, Tooltip, Fab } from '@material-ui/core';
-import { Settings, Close, Send, PlayCircleFilled, PauseCircleFilled } from '@material-ui/icons';
+import { Settings, Stop, Close, Send, PlayCircleFilled } from '@material-ui/icons';
 export default function OptsArea({
   popperAnchorEl,
   handleMocking,
@@ -16,7 +16,7 @@ export default function OptsArea({
       <Grid item>
         <Tooltip placement="bottom" title={mocking ? '停止模拟' : '开始模拟'} arrow>
           <Fab size="small" color="primary" onClick={handleMocking}>
-            {mocking ? <PauseCircleFilled /> : <PlayCircleFilled />}
+            {mocking ? <Stop /> : <PlayCircleFilled />}
           </Fab>
         </Tooltip>
       </Grid>

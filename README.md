@@ -2,7 +2,7 @@
 
 > 基于 CSS3 动画，使用 React 构建，可扩展，高性能。
 
-[![NPM](https://img.shields.io/npm/v/rc-bullets.svg)](https://www.npmjs.com/package/rc-bullets) [![NPM downloads](https://img.shields.io/npm/dm/rc-bullets.svg)](http://npmjs.com/package/rc-bullets)
+[![NPM](https://img.shields.io/npm/v/rc-bullets.svg)](https://www.npmjs.com/package/rc-bullets) [![NPM downloads](https://img.shields.io/npm/dm/rc-bullets.svg)](http://npmjs.com/package/rc-bullets) [![twitter](https://img.shields.io/twitter/follow/wsygc?style=social)](https://twitter.com/wsygc)
 
 ## 演示地址
 
