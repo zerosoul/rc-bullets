@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { getCorrectTextColor } from './helper';
 
 const StyledWrapper = styled.div`
   padding: 8px 18px;
@@ -43,9 +44,10 @@ const StyledWrapper = styled.div`
     }
   }
 `;
-const StyledBullet = ({ msg, head, color, bgColor }) => {
+const StyledBullet = ({ msg, head, color, bgColor = '#fff' }) => {
+  const fontColor = color || getCorrectTextColor(bgColor);
   return (
-    <StyledWrapper color={color} bgColor={bgColor}>
+    <StyledWrapper color={fontColor} bgColor={bgColor}>
       {head && (
         <div className="head">
           <img src={head} alt="msg head" />

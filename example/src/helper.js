@@ -53,53 +53,48 @@ const heads = [
   }
 ];
 
-const themes = {
-  yingbai: {
+const themes = [
+  {
     title: '莹白',
     color: 'rgb(22,22,2)',
     bgColor: 'rgba(227,249,253,.8)'
   },
-  chabai: {
+  {
     title: '茶白',
     color: 'rgb(22,22,2)',
     bgColor: 'rgba(243,249,241,.8)'
   },
-  weilan: {
+  {
     title: '蔚蓝',
     color: 'rgb(22,22,2)',
     bgColor: 'rgba(112,243,255,.9)'
   },
-  zise: {
+  {
     title: '紫色',
     color: 'rgb(233, 241, 246)',
     bgColor: 'rgba(141,75,187,.8)'
   },
-  fense: {
+  {
     title: '粉色',
     color: 'rgb(22,22,2)',
     bgColor: 'rgba(255,179,167,.8)'
   },
-  yanzhi: {
+  {
     title: '胭脂色',
     color: 'rgb(233, 241, 246)',
     bgColor: 'rgba(157,41,51,.8)'
   },
-  tong: {
+  {
     title: '彤色',
     color: 'rgb(233, 241, 246)',
     bgColor: 'rgba(243,83,54,.8)'
   },
-  yanhong: {
+  {
     title: '殷红',
     color: 'rgb(233, 241, 246)',
     bgColor: 'rgba(190,0,47,.8)'
   }
-};
-const getRandomTheme = () => {
-  const keys = Object.keys(themes);
-  let tmpKey = keys[Math.floor(Math.random() * keys.length)];
-  return tmpKey;
-};
+];
 
 const animateFuns = {
   linear: {
@@ -128,5 +123,8 @@ const getRandomAniFun = () => {
 };
 const getRandomHead = () => {
   return heads[Math.floor(Math.random() * heads.length)].path;
+};
+const getRandomTheme = () => {
+  return themes[Math.floor(Math.random() * themes.length)].bgColor;
 };
 export { getRandomTheme, themes, animateFuns, getRandomAniFun, heads, getRandomHead };

@@ -17,18 +17,21 @@ const defaultOpts = {
 };
 export default class BulletScreen {
   target = null;
+  options = defaultOpts;
   bullets = [];
   allPaused = false;
   allHide = false;
-  constructor(option) {
+  constructor(ele, opts = {}) {
+    // 更新默认配置项
+    this.options = Object.assign(this.options, opts);
     // 设置弹幕目标
-    if (typeof option === 'string') {
-      this.target = document.querySelector(option);
+    if (typeof ele === 'string') {
+      this.target = document.querySelector(ele);
       if (!this.target) {
         throw new Error('The display target does not exist');
       }
-    } else if (option instanceof HTMLElement) {
-      this.target = option;
+    } else if (ele instanceof HTMLElement) {
+      this.target = ele;
     } else {
       throw new Error('The display target of the barrage must be set');
     }
@@ -42,8 +45,8 @@ export default class BulletScreen {
     // 插入css animation
     initBulletAnimate(this.target);
   }
-  push(item, opts = defaultOpts) {
-    const options = Object.assign(defaultOpts, opts);
+  push(item, opts = {}) {
+    const options = Object.assign(this.options, opts);
     const currCount = this.bullets.length;
     const bulletContainer = getContainer({
       ...options,

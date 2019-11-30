@@ -59,17 +59,13 @@ export default function Dashboard() {
       console.log('start send');
       let currHead = head === 'random' ? getRandomHead() : head;
       let currAnimteFun = animateFun === 'random' ? getRandomAniFun() : animateFun;
-      let themeKey = theme === 'random' ? getRandomTheme() : theme;
-      let { color, bgColor } = themes[themeKey];
+      let bgColor = theme === 'random' ? getRandomTheme() : theme;
 
-      currScreen.push(
-        <StyledBullet msg={bullet || msg} head={currHead} color={color} bgColor={bgColor} />,
-        {
-          loopCount: isInfinite ? 'infinite' : loopCount,
-          animateTimeFun: currAnimteFun,
-          duration: dur ? dur : duration
-        }
-      );
+      currScreen.push(<StyledBullet msg={bullet || msg} head={currHead} bgColor={bgColor} />, {
+        loopCount: isInfinite ? 'infinite' : loopCount,
+        animateTimeFun: currAnimteFun,
+        duration: dur ? dur : duration
+      });
       if (bullet) {
         setBullet('');
       }

@@ -1,4 +1,4 @@
-# React 弹幕
+# React 弹幕 🌈🌈🌈
 
 > 基于 CSS3 动画，使用 React 构建，可扩展，高性能。
 
@@ -6,7 +6,7 @@
 
 ## 演示地址
 
-请访问：[zerosoul.github.io/rc-bullets/](https://zerosoul.github.io/rc-bullets/)
+👉[zerosoul.github.io/rc-bullets/](https://zerosoul.github.io/rc-bullets/)
 
 ![demo gif](demo.gif)
 
@@ -75,8 +75,8 @@ export default function Demo() {
 
 ## 常用 API
 
-- 初始化弹幕屏幕：`const screen = new BulletScreen(<queryString>|<HTMLElement>)`
-- 发送弹幕：`const bulletId = screen.push(<string>|<ReactElement>,option)`
+- 初始化弹幕屏幕：`const screen = new BulletScreen(<queryString>|<HTMLElement>,[<option>])`，此处的`option`和下面的一致，偏向全局初始化，没有则使用默认值，每次发送弹幕不传则使用默认或全局设置，传了则该条弹幕覆盖全局设置。
+- 发送弹幕：`const bulletId = screen.push(<string>|<ReactElement>,[<option>])`
 
 `option`：
 
