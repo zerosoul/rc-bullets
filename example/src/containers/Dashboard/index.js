@@ -6,7 +6,7 @@ import BulletScreen, { StyledBullet } from 'rc-bullets';
 import { Popper } from '@material-ui/core';
 
 import BulletsScreen from '../Screen';
-import { themes, getRandomTheme, getRandomHead, getRandomAniFun } from '../../helper';
+import { getRandomTheme, getRandomHead, getRandomAniFun } from '../../helper';
 import GithubLink from '../../components/GithubLink';
 import ParamsPanel from './ParamsPanel';
 import useParams from './useParams';

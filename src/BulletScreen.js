@@ -11,8 +11,6 @@ const defaultOpts = {
   duration: 10,
   delay: 0,
   direction: 'normal',
-  color: '#fff',
-  bgColor: 'rgba(2,2,2,.4)',
   animateTimeFun: 'linear'
 };
 export default class BulletScreen {
