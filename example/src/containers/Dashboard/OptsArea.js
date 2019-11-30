@@ -14,18 +14,16 @@ export default function OptsArea({
   return (
     <Grid container spacing={2} alignItems="center" justify="center">
       <Grid item>
-        <Tooltip placement="bottom" title={mocking ? '停止模拟' : '开始模拟'} arrow>
+        <Tooltip placement="bottom" title={mocking ? '停止模拟' : '模拟'} arrow>
           <Fab size="small" color="primary" onClick={handleMocking}>
             {mocking ? <Stop /> : <PlayCircleFilled />}
           </Fab>
         </Tooltip>
       </Grid>
       <Grid item>
-        <Tooltip placement="bottom" title={open ? '关闭设置' : '设置'} arrow>
-          <Fab size="small" color="primary" ref={popperAnchorEl} onClick={toggleStates('open')}>
-            {open ? <Close /> : <Settings />}
-          </Fab>
-        </Tooltip>
+        <Fab size="small" color="primary" ref={popperAnchorEl} onClick={toggleStates('open')}>
+          {open ? <Close /> : <Settings />}
+        </Fab>
       </Grid>
       <Grid item xs={6}>
         <TextField

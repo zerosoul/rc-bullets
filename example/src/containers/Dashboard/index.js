@@ -1,17 +1,19 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import styled from 'styled-components';
 import Mock from 'mockjs';
 // import { Link } from 'react-router-dom';
 import BulletScreen, { StyledBullet } from 'rc-bullets';
 import { Popper } from '@material-ui/core';
-
 import BulletsScreen from '../Screen';
-import { getRandomTheme, getRandomHead, getRandomAniFun } from '../../helper';
-import GithubLink from '../../components/GithubLink';
 import ParamsPanel from './ParamsPanel';
-import useParams from './useParams';
-import OptsArea from './OptsArea';
+import { getRandomTheme, getRandomHead, getRandomAniFun } from '../../helper';
 
+// import GithubLink from '../../components/GithubLink';
+// import OptsArea from './OptsArea';
+import Loading from '../../components/Loading';
+import useParams from './useParams';
+const GithubLink = lazy(() => import('../../components/GithubLink'));
+const OptsArea = lazy(() => import('./OptsArea'));
 const StyledWrapper = styled.section`
   .opts {
     z-index: 998;
@@ -74,31 +76,35 @@ export default function Dashboard() {
 
   return (
     <StyledWrapper>
-      <GithubLink />
+      <Suspense fallback={<Loading />}>
+        <GithubLink />
+      </Suspense>
       <BulletsScreen screen={currScreen} />
-      {/* <Link className="demo" target="_blank" to="/preview">
-        preview
-      </Link> */}
-      <div className="opts">
-        <Popper anchorEl={popperAnchorEl.current} open={open} placement="top-start">
-          <ParamsPanel
-            {...params}
-            isInfinite={isInfinite}
-            handleChange={handleChange}
-            toggleStates={toggleStates}
-          />
-        </Popper>
-        <OptsArea
-          bullet={bullet}
-          mocking={mocking}
-          open={open}
-          toggleStates={toggleStates}
-          popperAnchorEl={popperAnchorEl}
-          handleMocking={toggleSendMocking}
-          handleInput={handleInput}
-          handleSend={handleSend}
-        />
-      </div>
+
+      <Suspense fallback={<Loading />}>
+        <div className="opts">
+          <Popper anchorEl={popperAnchorEl.current} open={open} placement="top-start">
+            <ParamsPanel
+              {...params}
+              isInfinite={isInfinite}
+              handleChange={handleChange}
+              toggleStates={toggleStates}
+            />
+          </Popper>
+          <Suspense fallback={<Loading />}>
+            <OptsArea
+              bullet={bullet}
+              mocking={mocking}
+              open={open}
+              toggleStates={toggleStates}
+              popperAnchorEl={popperAnchorEl}
+              handleMocking={toggleSendMocking}
+              handleInput={handleInput}
+              handleSend={handleSend}
+            />
+          </Suspense>
+        </div>
+      </Suspense>
     </StyledWrapper>
   );
 }
