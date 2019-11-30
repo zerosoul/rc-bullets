@@ -112,7 +112,7 @@ const getContainer = opts => {
 };
 function getRGB(str) {
   var match = str.match(/rgba?\((\d{1,3}), ?(\d{1,3}), ?(\d{1,3})\)?(?:, ?(\d(?:\.\d?))\))?/);
-  return match ? [match[1], match[2], match[3]] : {};
+  return match ? [match[1], match[2], match[3]] : [0, 0, 0];
 }
 function getCorrectTextColor(rgb = [0, 0, 0]) {
   /*
@@ -125,9 +125,12 @@ function getCorrectTextColor(rgb = [0, 0, 0]) {
 
   */
   if ((typeof rgb === 'string' || rgb instanceof String) && rgb.indexOf('#') > -1) {
+    console.log('rgb is hex');
     rgb = convert.hex.rgb(rgb);
   } else if (typeof rgb === 'string') {
+    console.log('rgb string', rgb);
     rgb = getRGB(rgb);
+    console.log('rgb converted', rgb);
   }
   console.log({ rgb });
 
