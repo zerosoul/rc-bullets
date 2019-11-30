@@ -1,44 +1,5 @@
-// import React from 'react';
 import convert from 'color-convert';
 
-// const BounceIn = `
-// @keyframes BounceIn {
-//   from,
-//   20%,
-//   40%,
-//   60%,
-//   80%,
-//   to {
-//     animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-//   }
-
-//   0% {
-//     opacity: 0;
-//     transform: scale3d(0.3, 0.3, 0.3);
-//   }
-
-//   20% {
-//     transform: scale3d(1.1, 1.1, 1.1);
-//   }
-
-//   40% {
-//     transform: scale3d(0.9, 0.9, 0.9);
-//   }
-
-//   60% {
-//     opacity: 1;
-//     transform: scale3d(1.03, 1.03, 1.03);
-//   }
-
-//   80% {
-//     transform: scale3d(0.97, 0.97, 0.97);
-//   }
-
-//   to {
-//     opacity: 1;
-//     transform: scale3d(1, 1, 1);
-//   }
-// }`;
 const initBulletAnimate = screen => {
   if (!screen) {
     return;
@@ -52,11 +13,6 @@ const initBulletAnimate = screen => {
   let from = `from { visibility: visible; transform: translateX(${width}px); }`;
   let to = `to { visibility: visible; transform: translateX(-100%); }`;
   style.sheet.insertRule(`@keyframes RightToLeft { ${from} ${to} }`, 0);
-
-  // let newStyle = document.createElement('style');
-  // newStyle.classList.add(animateClass);
-  // document.head.appendChild(newStyle);
-  // newStyle.sheet.insertRule(BounceIn, 0);
 
   window.onresize = () => {
     [...document.querySelectorAll(`.${animateClass}`)].map(ele => {
@@ -154,7 +110,10 @@ const getContainer = opts => {
   }
   return bulletContainer;
 };
-
+function getRGB(str) {
+  var match = str.match(/rgba?\((\d{1,3}), ?(\d{1,3}), ?(\d{1,3})\)?(?:, ?(\d(?:\.\d?))\))?/);
+  return match ? [match[1], match[2], match[3]] : {};
+}
 function getCorrectTextColor(rgb = [0, 0, 0]) {
   /*
   From this W3C document: http://www.webmasterworld.com/r.cgi?f=88&d=9769&url=http://www.w3.org/TR/AERT#color-contrast
@@ -167,6 +126,8 @@ function getCorrectTextColor(rgb = [0, 0, 0]) {
   */
   if ((typeof rgb === 'string' || rgb instanceof String) && rgb.indexOf('#') > -1) {
     rgb = convert.hex.rgb(rgb);
+  } else if (typeof rgb === 'string') {
+    rgb = getRGB(rgb);
   }
   console.log({ rgb });
 
