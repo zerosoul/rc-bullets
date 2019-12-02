@@ -6,9 +6,10 @@ const useParams = () => {
     theme: 'random',
     animateFun: 'random',
     duration: 20,
-    loopCount: 3
+    loopCount: 2
   });
   const [states, setStates] = useState({
+    soundEffect: false,
     mocking: false,
     isInfinite: false,
     open: false

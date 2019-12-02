@@ -7,6 +7,8 @@ const defaultOpts = {
   animate: 'RightToLeft',
   pauseOnHover: true,
   pauseOnClick: false,
+  onStart: null,
+  onEnd: null,
   loopCount: 1,
   duration: 10,
   delay: 0,
@@ -45,6 +47,8 @@ export default class BulletScreen {
   }
   push(item, opts = {}) {
     const options = Object.assign(this.options, opts);
+
+    const { onStart, onEnd } = options;
     const currCount = this.bullets.length;
     const bulletContainer = getContainer({
       ...options,
@@ -74,14 +78,25 @@ export default class BulletScreen {
       }
     );
 
+    if (onStart) {
+      // 创建一个监听弹幕动画开始的事件
+      bulletContainer.addEventListener('animationstart', () => {
+        if (onStart) {
+          onStart.call(null, bulletContainer.id,this);
+        }
+      });
+    }
     // 创建一个监听弹幕动画完成的事件
     bulletContainer.addEventListener('animationend', () => {
+      // 如果设置了动画完成自定义函数，则执行
+      if (onEnd) {
+        onEnd.call(null, bulletContainer.id,this);
+      }
       // 从集合中剔除
       this.bullets = this.bullets.filter(function(obj) {
         return obj.id !== bulletContainer.id;
       });
       ReactDOM.unmountComponentAtNode(bulletContainer);
-      bulletContainer.remove();
     });
 
     // 返回该容器的ID
@@ -121,7 +136,6 @@ export default class BulletScreen {
     const currItem = this.bullets.find(item => item.id == id);
     if (currItem) {
       ReactDOM.unmountComponentAtNode(currItem);
-      currItem.remove();
       this.bullets = this.bullets.filter(function(item) {
         return item.id !== id;
       });
@@ -129,7 +143,6 @@ export default class BulletScreen {
     }
     this.bullets.forEach(item => {
       ReactDOM.unmountComponentAtNode(item);
-      item.remove();
     });
     this.bullets = [];
   }

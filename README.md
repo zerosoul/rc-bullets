@@ -80,21 +80,23 @@ export default function Demo() {
 
 `option`：
 
-| 选项           | 含义         | 值类型        | 默认值      | 备注                                                                                                                |
-| -------------- | ------------ | ------------- | ----------- | ------------------------------------------------------------------------------------------------------------------- |
-| pauseOnClick   | 鼠标点击暂停 | boolean       | false       | 再次点击继续                                                                                                        |
-| pauseOnHover   | 鼠标悬停暂停 | boolean       | true        |                                                                                                                     |
-| loopCount      | 循环次数     | number/string | 1           | 值为‘infinite’时，表示无限循环                                                                                      |
-| duration       | 滚动时长     | number/string | 10          | 数字则单位为‘秒’，字符串则支持'10s'和'300ms'两种单位                                                                |
-| delay          | 延迟         | number/string | 0           | 数字则单位为‘秒’，字符串则支持'10s'和'300ms'两种单位                                                                | [animation-delay](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-delay)支持的所有值 |
-| direction      | 动画方向     | string        | normal      | [animation-direction](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-direction)支持的所有值             |
-| animateTimeFun | 动画函数     | string        | linear:匀速 | [animation-timing-function](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timing-function)支持的所有值 |
+| 选项           | 含义               | 值类型        | 默认值      | 备注                                                                                                                      |
+| -------------- | ------------------ | ------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------- |
+| onStart        | 自定义动画开始函数 | function      | null        | e.g.(bulletId,screen)=>{//do something}可以自定义一些动作，比如播放某个音效，在特定时间暂停该弹幕：screen.pause(bulletId) |
+| onEnd          | 自定义动画结束函数 | function      | null        | e.g.(bulletId,screen)=>{//do something}可以自定义一些动作，比如播放某个音效                                               |
+| pauseOnClick   | 鼠标点击暂停       | boolean       | false       | 再次点击继续                                                                                                              |
+| pauseOnHover   | 鼠标悬停暂停       | boolean       | true        | 鼠标进入暂停，离开继续                                                                                                    |
+| loopCount      | 循环次数           | number/string | 1           | 值为‘infinite’时，表示无限循环                                                                                            |
+| duration       | 滚动时长           | number/string | 10          | 数字则单位为‘秒’，字符串则支持'10s'和'300ms'两种单位                                                                      |
+| delay          | 延迟               | number/string | 0           | 数字则单位为‘秒’，字符串则支持'10s'和'300ms'两种单位                                                                      | [animation-delay](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-delay)支持的所有值 |
+| direction      | 动画方向           | string        | normal      | [animation-direction](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-direction)支持的所有值                   |
+| animateTimeFun | 动画函数           | string        | linear:匀速 | [animation-timing-function](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timing-function)支持的所有值       |
 
 - 弹幕清屏：`screen.clear([<bulletId>])`，无参则清除全部
 - 暂停弹幕：`screen.pause([<bulletId>])`，无参则暂停全部
 - 弹幕继续：`screen.resume([<bulletId>])`，无参则继续全部
-- 隐藏弹幕（滚动继续）：`screen.hide()`
-- 显示弹幕：`screen.show()`
+- 隐藏弹幕（滚动继续）：`screen.hide([<bulletId>])`，无参则隐藏全部
+- 显示弹幕：`screen.show([<bulletId>])`，无参则显示全部
 - 自带的一个弹幕样式组件：`<StyledBullet msg="<弹幕内容>" head="<头像地址>" color="<字体颜色>" bgColor="<背景色>">`
 
 ## TO DO

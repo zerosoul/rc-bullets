@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
 import BulletScreen from './BulletScreen';
-
+let screen = null;
 function useBulletScreen(ele) {
-  const [screen, setScreen] = useState(null);
   const [bullets, setBullets] = useState([]);
   useEffect(() => {
-    let tmp = new BulletScreen(ele);
-    setScreen(tmp);
+    screen = new BulletScreen(ele);
   }, [ele]);
   const sendBullet = (bullet, opts = {}) => {
     let curr = screen.push(bullet, opts);

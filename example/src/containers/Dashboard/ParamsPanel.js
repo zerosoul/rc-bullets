@@ -27,7 +27,8 @@ export default function ParamsPanel({
   duration,
   loopCount,
   animateFun,
-  isInfinite
+  isInfinite,
+  soundEffect
 }) {
   const classes = useStyles();
 
@@ -137,6 +138,21 @@ export default function ParamsPanel({
               />
             }
             label="无限循环"
+          />
+        </Grid>
+      </Grid>
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={soundEffect}
+                onChange={toggleStates('soundEffect')}
+                value="soundEffect"
+                color="secondary"
+              />
+            }
+            label="开启音效"
           />
         </Grid>
       </Grid>
