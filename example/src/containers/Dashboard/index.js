@@ -112,37 +112,38 @@ export default function Dashboard() {
   };
 
   return (
-    <StyledWrapper>
-      <Suspense fallback={<Loading />}>
-        <GithubLink />
-      </Suspense>
-      <BulletsScreen screen={currScreen} />
+    <>
+      <ParamsPanel
+        {...params}
+        isInfinite={isInfinite}
+        soundEffect={soundEffect}
+        handleChange={handleChange}
+        toggleStates={toggleStates}
+        open={open}
+      />
+      <StyledWrapper>
+        <Suspense fallback={<Loading />}>
+          <GithubLink />
+        </Suspense>
+        <BulletsScreen screen={currScreen} />
 
-      <Suspense fallback={<Loading />}>
-        <div className="opts">
-          <Popper anchorEl={popperAnchorEl.current} open={open} placement="top-start">
-            <ParamsPanel
-              {...params}
-              isInfinite={isInfinite}
-              soundEffect={soundEffect}
-              handleChange={handleChange}
-              toggleStates={toggleStates}
-            />
-          </Popper>
-          <Suspense fallback={<Loading />}>
-            <OptsArea
-              bullet={bullet}
-              mocking={mocking}
-              open={open}
-              toggleStates={toggleStates}
-              popperAnchorEl={popperAnchorEl}
-              handleMocking={toggleSendMocking}
-              handleInput={handleInput}
-              handleSend={handleSend}
-            />
-          </Suspense>
-        </div>
-      </Suspense>
-    </StyledWrapper>
+        <Suspense fallback={<Loading />}>
+          <div className="opts">
+            <Suspense fallback={<Loading />}>
+              <OptsArea
+                bullet={bullet}
+                mocking={mocking}
+                open={open}
+                toggleStates={toggleStates}
+                popperAnchorEl={popperAnchorEl}
+                handleMocking={toggleSendMocking}
+                handleInput={handleInput}
+                handleSend={handleSend}
+              />
+            </Suspense>
+          </div>
+        </Suspense>
+      </StyledWrapper>
+    </>
   );
 }

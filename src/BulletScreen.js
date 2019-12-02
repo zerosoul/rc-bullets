@@ -49,12 +49,9 @@ export default class BulletScreen {
     const options = Object.assign(this.options, opts);
 
     const { onStart, onEnd } = options;
-    const currCount = this.bullets.length;
     const bulletContainer = getContainer({
       ...options,
-      pause: this.allPaused,
-      hide: this.allHide,
-      zIndex: currCount + 10
+      currScreen: this
     });
     this.target.appendChild(bulletContainer);
     // 加入当前存在的弹幕列表
@@ -82,7 +79,7 @@ export default class BulletScreen {
       // 创建一个监听弹幕动画开始的事件
       bulletContainer.addEventListener('animationstart', () => {
         if (onStart) {
-          onStart.call(null, bulletContainer.id,this);
+          onStart.call(null, bulletContainer.id, this);
         }
       });
     }
@@ -90,13 +87,14 @@ export default class BulletScreen {
     bulletContainer.addEventListener('animationend', () => {
       // 如果设置了动画完成自定义函数，则执行
       if (onEnd) {
-        onEnd.call(null, bulletContainer.id,this);
+        onEnd.call(null, bulletContainer.id, this);
       }
       // 从集合中剔除
       this.bullets = this.bullets.filter(function(obj) {
         return obj.id !== bulletContainer.id;
       });
       ReactDOM.unmountComponentAtNode(bulletContainer);
+      bulletContainer.remove();
     });
 
     // 返回该容器的ID
@@ -109,7 +107,7 @@ export default class BulletScreen {
       return;
     }
 
-    this.allPaused = true;
+    this.allPaused = status === 'paused' ? true : false;
     this.bullets.forEach(item => {
       item.style.animationPlayState = status;
     });
@@ -136,6 +134,7 @@ export default class BulletScreen {
     const currItem = this.bullets.find(item => item.id == id);
     if (currItem) {
       ReactDOM.unmountComponentAtNode(currItem);
+      currItem.remove();
       this.bullets = this.bullets.filter(function(item) {
         return item.id !== id;
       });
@@ -143,6 +142,7 @@ export default class BulletScreen {
     }
     this.bullets.forEach(item => {
       ReactDOM.unmountComponentAtNode(item);
+      item.remove();
     });
     this.bullets = [];
   }

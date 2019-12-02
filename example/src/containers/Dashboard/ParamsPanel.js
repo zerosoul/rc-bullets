@@ -4,22 +4,16 @@ import {
   TextField,
   Select,
   MenuItem,
-  Paper,
-  Grid,
   Avatar,
+  List,
+  ListItem,
   FormControlLabel,
-  Checkbox
+  Checkbox,
+  SwipeableDrawer
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 import { themes, heads, animateFuns } from '../../helper';
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    padding: theme.spacing(3, 2),
-    marginBottom: theme.spacing(3)
-  }
-}));
 export default function ParamsPanel({
+  open,
   handleChange,
   toggleStates,
   head,
@@ -30,12 +24,10 @@ export default function ParamsPanel({
   isInfinite,
   soundEffect
 }) {
-  const classes = useStyles();
-
   return (
-    <Paper className={classes.root}>
-      <Grid container spacing={2}>
-        <Grid item xs={6}>
+    <SwipeableDrawer onClose={toggleStates('open')} open={open}>
+      <List>
+        <ListItem>
           <InputLabel shrink id="img-label">
             头像
           </InputLabel>
@@ -52,8 +44,8 @@ export default function ParamsPanel({
               );
             })}
           </Select>
-        </Grid>
-        <Grid item xs={6}>
+        </ListItem>
+        <ListItem>
           <InputLabel shrink id="theme-label">
             主题色
           </InputLabel>
@@ -81,10 +73,8 @@ export default function ParamsPanel({
               );
             })}
           </Select>
-        </Grid>
-      </Grid>
-      <Grid container spacing={2}>
-        <Grid item xs={6}>
+        </ListItem>
+        <ListItem>
           <InputLabel shrink id="animate-fun-label">
             运动函数
           </InputLabel>
@@ -101,8 +91,8 @@ export default function ParamsPanel({
               );
             })}
           </Select>
-        </Grid>
-        <Grid item xs={6}>
+        </ListItem>
+        <ListItem>
           <TextField
             InputProps={{
               inputProps: { min: 1 }
@@ -112,10 +102,8 @@ export default function ParamsPanel({
             value={duration}
             onChange={handleChange('duration')}
           />
-        </Grid>
-      </Grid>
-      <Grid container spacing={2}>
-        <Grid item xs={6}>
+        </ListItem>
+        <ListItem>
           <TextField
             disabled={isInfinite}
             InputProps={{
@@ -126,8 +114,8 @@ export default function ParamsPanel({
             value={isInfinite ? 9999 : loopCount}
             onChange={handleChange('loopCount')}
           />
-        </Grid>
-        <Grid item xs={6}>
+        </ListItem>
+        <ListItem>
           <FormControlLabel
             control={
               <Checkbox
@@ -139,10 +127,8 @@ export default function ParamsPanel({
             }
             label="无限循环"
           />
-        </Grid>
-      </Grid>
-      <Grid container spacing={2}>
-        <Grid item xs={6}>
+        </ListItem>
+        <ListItem>
           <FormControlLabel
             control={
               <Checkbox
@@ -154,8 +140,8 @@ export default function ParamsPanel({
             }
             label="开启音效"
           />
-        </Grid>
-      </Grid>
-    </Paper>
+        </ListItem>
+      </List>
+    </SwipeableDrawer>
   );
 }
