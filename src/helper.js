@@ -29,9 +29,7 @@ const isPlainObject = val => {
 };
 const getContainer = opts => {
   const {
-    pause,
-    hide,
-    zIndex,
+    currScreen,
     pauseOnHover,
     pauseOnClick,
     animate,
@@ -53,7 +51,7 @@ const getContainer = opts => {
   bulletContainer.style.cursor = 'pointer';
   bulletContainer.style.position = 'absolute';
   bulletContainer.style.left = 0;
-  bulletContainer.style.zIndex = zIndex;
+  // bulletContainer.style.zIndex = zIndex;
   bulletContainer.style.visibility = 'hidden';
   bulletContainer.style.animationName = animate;
   bulletContainer.style.animationIterationCount = loopCount;
@@ -65,7 +63,7 @@ const getContainer = opts => {
   // 性能小优化
   bulletContainer.style.willChange = 'transform';
   // 隐藏
-  if (hide) {
+  if (currScreen.allHide) {
     bulletContainer.style.opacity = 0;
   }
   // pause on hover
@@ -83,7 +81,7 @@ const getContainer = opts => {
       'mouseleave',
       () => {
         console.log('leave');
-        if (!pause && !bulletContainer.dataset.clicked) {
+        if (!currScreen.allPaused && !bulletContainer.dataset.clicked) {
           bulletContainer.style.animationPlayState = 'running';
         }
       },
