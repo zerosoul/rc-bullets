@@ -34,34 +34,25 @@ let currScreen = null;
 export default function Dashboard() {
   const [bullet, setBullet] = useState('');
 
-  const popperAnchorEl = useRef(null);
   const { params, states, toggleStates, handleChange } = useParams();
   const { mocking, isInfinite, open, soundEffect } = states;
   const { theme, loopCount, head, duration, animateFun } = params;
-  const handleStart = useCallback(
-    (bulletId, screen) => {
-      console.log({ bulletId });
-      if (soundEffect) {
-        startSoundEle.play();
-      }
-    },
-    [soundEffect]
-  );
-  const handleEnd = useCallback(
-    (bulletId, screen) => {
-      console.log({ bulletId });
-      if (soundEffect) {
-        endSoundEle.play();
-      }
-    },
-    [soundEffect]
-  );
+  const handleStart = useCallback(() => {
+    if (soundEffect) {
+      startSoundEle.play();
+    }
+  }, [soundEffect]);
+  const handleEnd = useCallback(() => {
+    if (soundEffect) {
+      endSoundEle.play();
+    }
+  }, [soundEffect]);
 
   useEffect(() => {
     if (!currScreen) {
       currScreen = new BulletScreen('.screen');
     }
-  }, [handleStart]);
+  }, []);
   const handleInput = ({ target: { value } }) => {
     console.log(value);
 
@@ -133,9 +124,7 @@ export default function Dashboard() {
               <OptsArea
                 bullet={bullet}
                 mocking={mocking}
-                open={open}
                 toggleStates={toggleStates}
-                popperAnchorEl={popperAnchorEl}
                 handleMocking={toggleSendMocking}
                 handleInput={handleInput}
                 handleSend={handleSend}

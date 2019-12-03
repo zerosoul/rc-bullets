@@ -4,7 +4,7 @@ const useParams = () => {
   const [params, setParams] = useState({
     head: 'random',
     theme: 'random',
-    animateFun: 'random',
+    animateFun: 'linear',
     duration: 20,
     loopCount: 2
   });

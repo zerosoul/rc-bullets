@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, TextField, Grid, Tooltip, Fab } from '@material-ui/core';
-import { Settings, Stop, Close, Send, PlayCircleFilled } from '@material-ui/icons';
+import { Settings, Stop, Send, PlayCircleFilled } from '@material-ui/icons';
 export default function OptsArea({
   popperAnchorEl,
   handleMocking,
@@ -8,8 +8,7 @@ export default function OptsArea({
   handleSend,
   bullet,
   mocking,
-  toggleStates,
-  open
+  toggleStates
 }) {
   return (
     <Grid container spacing={2} alignItems="center" justify="center">
@@ -22,7 +21,7 @@ export default function OptsArea({
       </Grid>
       <Grid item>
         <Fab size="small" color="primary" ref={popperAnchorEl} onClick={toggleStates('open')}>
-          {open ? <Close /> : <Settings />}
+          <Settings />
         </Fab>
       </Grid>
       <Grid item xs={6}>
