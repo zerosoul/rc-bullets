@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useCallback, useRef, lazy, Suspense } from 'react';
+import React, { useState, useEffect, useCallback, lazy, Suspense } from 'react';
 import styled from 'styled-components';
 import Mock from 'mockjs';
 // import { Link } from 'react-router-dom';
 import BulletScreen, { StyledBullet } from 'rc-bullets';
-import { Popper } from '@material-ui/core';
 import BulletsScreen from '../Screen';
 import ParamsPanel from './ParamsPanel';
 import audioStart from '../../assets/start.mp3';
@@ -51,6 +50,10 @@ export default function Dashboard() {
   useEffect(() => {
     if (!currScreen) {
       currScreen = new BulletScreen('.screen');
+      currScreen.push(
+        <StyledBullet head="assets/img/heads/girl.jpg" msg="欢迎体验rc-bullets弹幕功能~~" />,
+        { duration: 40, top: '45%' }
+      );
     }
   }, []);
   const handleInput = ({ target: { value } }) => {
@@ -82,19 +85,21 @@ export default function Dashboard() {
       let currHead = head === 'random' ? getRandomHead() : head;
       let currAnimteFun = animateFun === 'random' ? getRandomAniFun() : animateFun;
       let bgColor = theme === 'random' ? getRandomTheme() : theme;
+      let newOpts = Object.assign(
+        {
+          onStart: handleStart,
+          onEnd: handleEnd,
+          loopCount: isInfinite ? 'infinite' : loopCount,
+          animateTimeFun: currAnimteFun,
+          duration
+        },
+        opts
+      );
+      console.log({ opts });
 
       currScreen.push(
         <StyledBullet msg={bullet || msg} head={currHead} bgColor={bgColor} />,
-        Object.assign(
-          {
-            onStart: handleStart,
-            onEnd: handleEnd,
-            loopCount: isInfinite ? 'infinite' : loopCount,
-            animateTimeFun: currAnimteFun,
-            duration
-          },
-          opts
-        )
+        newOpts
       );
       if (bullet) {
         setBullet('');

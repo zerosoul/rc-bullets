@@ -25,7 +25,13 @@ export default function ParamsPanel({
   soundEffect
 }) {
   return (
-    <SwipeableDrawer onClose={toggleStates('open')} open={open}>
+    <SwipeableDrawer
+      onOpen={() => {
+        console.log('open drawer');
+      }}
+      onClose={toggleStates('open')}
+      open={open}
+    >
       <List>
         <ListItem>
           <InputLabel shrink id="img-label">

@@ -4,6 +4,7 @@ import { initBulletAnimate, isPlainObject, getContainer } from './helper';
 import StyledBullet from './StyledBullet';
 
 const defaultOpts = {
+  top: null,
   animate: 'RightToLeft',
   pauseOnHover: true,
   pauseOnClick: false,
@@ -23,7 +24,7 @@ export default class BulletScreen {
   allHide = false;
   constructor(ele, opts = {}) {
     // 更新默认配置项
-    this.options = Object.assign(this.options, opts);
+    this.options = Object.assign({}, this.options, opts);
     // 设置弹幕目标
     if (typeof ele === 'string') {
       this.target = document.querySelector(ele);
@@ -46,9 +47,10 @@ export default class BulletScreen {
     initBulletAnimate(this.target);
   }
   push(item, opts = {}) {
-    const options = Object.assign(this.options, opts);
+    const options = Object.assign({}, this.options, opts);
+    console.log({ options });
 
-    const { onStart, onEnd } = options;
+    const { onStart, onEnd, top } = options;
     const bulletContainer = getContainer({
       ...options,
       currScreen: this
@@ -71,7 +73,7 @@ export default class BulletScreen {
         // 获取当前弹幕的尺寸
         const { height } = bulletContainer.getBoundingClientRect();
         // 设置当前弹幕的高度为随机
-        bulletContainer.style.top = Math.random() * (screenHeight - height) + 'px';
+        bulletContainer.style.top = top ? top : Math.random() * (screenHeight - height) + 'px';
       }
     );
 
