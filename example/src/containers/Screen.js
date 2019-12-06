@@ -61,7 +61,6 @@ export default function ScreenPage({ screen }) {
           top: 0,
           left: 0,
           zIndex: 998,
-          background: 'rgba(2,2,2,.4)',
           padding: '.5rem .8rem'
         }}
       >
@@ -88,7 +87,7 @@ export default function ScreenPage({ screen }) {
           </IconButton>
         </Tooltip>
       </aside>
-      <section style={{ height: '100vh' }} className="screen"></section>
+      <section style={{ height: '70vh', marginTop: '15vh' }} className="screen"></section>
     </>
   );
 }

@@ -66,8 +66,9 @@ export default function Dashboard() {
 
     if (!mocking) {
       mockingInter = setInterval(() => {
-        handleSend(Mock.Random.csentence(3, 28), {
-          duration: Math.random() * 50
+        const randomTxt = Mock.Random.csentence(10, 12);
+        handleSend(randomTxt, {
+          // duration: Math.random() * 50
           // onStart: null,
           // onEnd: null
         });
@@ -77,10 +78,10 @@ export default function Dashboard() {
     }
     toggleStates('mocking')();
   };
-  const handleSend = (msg = '', opts = {}) => {
-    console.log('current bullet', bullet);
+  const handleSend = (mssg = '', opts = {}) => {
+    console.log('current bullet', bullet, mssg);
 
-    if (bullet || msg) {
+    if (bullet || mssg) {
       console.log('start send');
       let currHead = head === 'random' ? getRandomHead() : head;
       let currAnimteFun = animateFun === 'random' ? getRandomAniFun() : animateFun;
@@ -97,11 +98,14 @@ export default function Dashboard() {
       );
       console.log({ opts });
 
+      // currScreen.push(bullet || mssg, newOpts);
       currScreen.push(
-        <StyledBullet msg={bullet || msg} head={currHead} bgColor={bgColor} />,
+        <StyledBullet msg={bullet || mssg} head={currHead} bgColor={bgColor} />,
         newOpts
       );
-      if (bullet) {
+      console.log({ mssg });
+
+      if (!mssg) {
         setBullet('');
       }
     }
@@ -132,7 +136,7 @@ export default function Dashboard() {
                 toggleStates={toggleStates}
                 handleMocking={toggleSendMocking}
                 handleInput={handleInput}
-                handleSend={handleSend}
+                handleSend={handleSend.bind(this, '', {})}
               />
             </Suspense>
           </div>

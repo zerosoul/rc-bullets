@@ -41,13 +41,14 @@ const getContainer = opts => {
   } = opts;
   // 创建单条弹幕的容器
   const bulletContainer = document.createElement('div');
+  // 随机ID
   bulletContainer.id = Math.random()
     .toString(36)
     .substring(2);
 
   // 设置弹幕容器的初始样式
   bulletContainer.style.transitionProperty = 'opacity';
-  bulletContainer.style.transitionDuration = '1s';
+  bulletContainer.style.transitionDuration = '0.5s';
   bulletContainer.style.cursor = 'pointer';
   bulletContainer.style.position = 'absolute';
   bulletContainer.style.left = 0;
@@ -142,4 +143,21 @@ function getCorrectTextColor(rgb = [0, 0, 0]) {
     return '#e9f1f6';
   }
 }
-export { initBulletAnimate, isPlainObject, getContainer, getCorrectTextColor };
+
+const options = {
+  // 跑道高度
+  trackHeight: 50,
+  // 弹幕之间的间距
+  gap: '10px',
+  animate: 'RightToLeft',
+  pauseOnHover: true,
+  pauseOnClick: false,
+  onStart: null,
+  onEnd: null,
+  loopCount: 1,
+  duration: 10,
+  delay: 0,
+  direction: 'normal',
+  animateTimeFun: 'linear'
+};
+export { options, initBulletAnimate, isPlainObject, getContainer, getCorrectTextColor };

@@ -1,30 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { initBulletAnimate, isPlainObject, getContainer } from './helper';
+import { options, initBulletAnimate, isPlainObject, getContainer } from './helper';
 import StyledBullet from './StyledBullet';
 
-const defaultOpts = {
-  top: null,
-  animate: 'RightToLeft',
-  pauseOnHover: true,
-  pauseOnClick: false,
-  onStart: null,
-  onEnd: null,
-  loopCount: 1,
-  duration: 10,
-  delay: 0,
-  direction: 'normal',
-  animateTimeFun: 'linear'
-};
 export default class BulletScreen {
   target = null;
-  options = defaultOpts;
+  options = options;
   bullets = [];
   allPaused = false;
   allHide = false;
+  tracks = [];
+  queues = [];
   constructor(ele, opts = {}) {
     // 更新默认配置项
-    this.options = Object.assign({}, this.options, opts);
+    this.options = Object.assign(this.options, opts);
+    const { trackHeight } = this.options;
     // 设置弹幕目标
     if (typeof ele === 'string') {
       this.target = document.querySelector(ele);
@@ -36,7 +26,9 @@ export default class BulletScreen {
     } else {
       throw new Error('The display target of the barrage must be set');
     }
-
+    // 初始化跑道
+    const { height } = this.target.getBoundingClientRect();
+    this.tracks = new Array(Math.floor(height / trackHeight)).fill(true);
     // 屏幕目标必须具备的CSS样式
     const { position } = getComputedStyle(this.target);
     if (position === 'static') {
@@ -46,36 +38,42 @@ export default class BulletScreen {
     // 插入css animation
     initBulletAnimate(this.target);
   }
+  _gettrack() {
+    let readyIdxs = [];
+    let idx = -1;
+    this.tracks.forEach((ready, idx) => {
+      if (ready) {
+        readyIdxs.push(idx);
+      }
+    });
+    if (readyIdxs.length) {
+      idx = readyIdxs[Math.floor(Math.random() * readyIdxs.length)];
+    }
+    if (idx !== -1) {
+      this.tracks[idx] = false;
+    }
+    return idx;
+  }
+
   push(item, opts = {}) {
     const options = Object.assign({}, this.options, opts);
     console.log({ options });
 
-    const { onStart, onEnd, top } = options;
+    const { onStart, onEnd } = options;
     const bulletContainer = getContainer({
       ...options,
       currScreen: this
     });
-    this.target.appendChild(bulletContainer);
+
     // 加入当前存在的弹幕列表
     this.bullets.push(bulletContainer);
-    // 实时获取屏幕的宽高
-    const { height: screenHeight } = this.target.getBoundingClientRect();
-
-    // 弹幕渲染进屏幕
-    ReactDOM.render(
-      React.isValidElement(item) || typeof item === 'string' ? (
-        item
-      ) : isPlainObject(item) ? (
-        <StyledBullet {...item}></StyledBullet>
-      ) : null,
-      bulletContainer,
-      () => {
-        // 获取当前弹幕的尺寸
-        const { height } = bulletContainer.getBoundingClientRect();
-        // 设置当前弹幕的高度为随机
-        bulletContainer.style.top = top ? top : Math.random() * (screenHeight - height) + 'px';
-      }
-    );
+    console.log('push before queues', this.queues, this.tracks);
+    const currIdletrack = this._gettrack();
+    if (currIdletrack === -1) {
+      this.queues.push([item, bulletContainer]);
+    } else {
+      this._render(item, bulletContainer, currIdletrack);
+    }
 
     if (onStart) {
       // 创建一个监听弹幕动画开始的事件
@@ -102,6 +100,48 @@ export default class BulletScreen {
     // 返回该容器的ID
     return bulletContainer.id;
   }
+  _render = (item, container, track) => {
+    this.target.appendChild(container);
+    const { gap, trackHeight } = this.options;
+    // 弹幕渲染进屏幕
+    ReactDOM.render(
+      React.isValidElement(item) || typeof item === 'string' ? (
+        item
+      ) : isPlainObject(item) ? (
+        <StyledBullet {...item} />
+      ) : null,
+      container,
+      () => {
+        let top = track * trackHeight;
+        container.dataset.track = track;
+        container.style.top = `${top}px`;
+        let options = {
+          root: this.target,
+          rootMargin: `0px ${gap} 0px 0px`,
+          threshold: 1.0
+        };
+        let observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            // 完全处于视窗之内
+            const { intersectionRatio, target } = entry;
+            console.log('bullet id', target.id, intersectionRatio);
+            if (intersectionRatio === 1) {
+              let trackIdx = target.dataset.track;
+              console.log('curr track value', this.tracks[trackIdx]);
+              console.log('curr queues', this.queues);
+              if (this.queues.length) {
+                const [item, container] = this.queues.shift();
+                this._render(item, container, trackIdx);
+              } else {
+                this.tracks[trackIdx] = true;
+              }
+            }
+          });
+        }, options);
+        observer.observe(container);
+      }
+    );
+  };
   _toggleAnimateStatus = (id, status = 'paused') => {
     const currItem = this.bullets.find(item => item.id == id);
     if (currItem) {

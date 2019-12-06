@@ -6,7 +6,7 @@ const useParams = () => {
     theme: 'random',
     animateFun: 'linear',
     duration: 20,
-    loopCount: 2
+    loopCount: 1
   });
   const [states, setStates] = useState({
     soundEffect: false,
