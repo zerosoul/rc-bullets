@@ -186,6 +186,9 @@ export default class BulletScreen {
       ReactDOM.unmountComponentAtNode(item);
       item.remove();
     });
+    const {height}=this.target.getBoundingClientRect();
+    this.tracks = new Array(Math.floor(height / this.options.trackHeight)).fill(true);
+    this.queues=[];
     this.bullets = [];
   }
 }
