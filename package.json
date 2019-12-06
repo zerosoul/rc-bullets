@@ -22,7 +22,7 @@
     "年会"
   ],
   "scripts": {
-    "build": "rollup -c",
+    "build": "NODE_ENV=production rollup -c",
     "start": "rollup -c -w",
     "prepare": "rm -rf ./dist && npm run build",
     "predeploy": "cd example &&  npm run build",

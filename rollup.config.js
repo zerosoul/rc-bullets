@@ -4,9 +4,9 @@ import external from 'rollup-plugin-peer-deps-external';
 import resolve from 'rollup-plugin-node-resolve';
 import url from 'rollup-plugin-url';
 import { terser } from 'rollup-plugin-terser';
-import svgr from '@svgr/rollup';
 
 import pkg from './package.json';
+// console.log('process wtf', process);
 
 export default {
   input: 'src/index.js',
@@ -18,14 +18,26 @@ export default {
       exports: 'named',
 
       sourcemap: true,
-      plugins: [terser()]
+      plugins: [
+        terser({
+          compress: {
+            drop_console: process.env.NODE_ENV !== 'production'
+          }
+        })
+      ]
     },
     {
       file: pkg.module,
       exports: 'named',
       format: 'es',
       sourcemap: true,
-      plugins: [terser()]
+      plugins: [
+        terser({
+          compress: {
+            drop_console: process.env.NODE_ENV !== 'production'
+          }
+        })
+      ]
     }
   ],
 
@@ -33,7 +45,6 @@ export default {
     external(),
 
     url(),
-    svgr(),
     babel({
       exclude: 'node_modules/**',
       runtimeHelpers: true
