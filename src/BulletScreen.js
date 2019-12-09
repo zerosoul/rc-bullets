@@ -33,12 +33,12 @@ export default class BulletScreen {
     const { position } = getComputedStyle(this.target);
     if (position === 'static') {
       this.target.style.position = 'relative';
-      this.target.style.overflow = 'hidden';
+      // this.target.style.overflow = 'hidden';
     }
     // 插入css animation
     initBulletAnimate(this.target);
   }
-  _gettrack() {
+  _getTrack() {
     let readyIdxs = [];
     let idx = -1;
     this.tracks.forEach((ready, idx) => {
@@ -68,8 +68,9 @@ export default class BulletScreen {
     // 加入当前存在的弹幕列表
     this.bullets.push(bulletContainer);
     console.log('push before queues', this.queues, this.tracks);
-    const currIdletrack = this._gettrack();
-    if (currIdletrack === -1) {
+    const currIdletrack = this._getTrack();
+    if (currIdletrack === -1 || this.allPaused) {
+      // 考虑到全部暂停的情景
       this.queues.push([item, bulletContainer]);
     } else {
       this._render(item, bulletContainer, currIdletrack);
@@ -186,9 +187,9 @@ export default class BulletScreen {
       ReactDOM.unmountComponentAtNode(item);
       item.remove();
     });
-    const {height}=this.target.getBoundingClientRect();
+    const { height } = this.target.getBoundingClientRect();
     this.tracks = new Array(Math.floor(height / this.options.trackHeight)).fill(true);
-    this.queues=[];
+    this.queues = [];
     this.bullets = [];
   }
 }

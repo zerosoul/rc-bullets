@@ -51,7 +51,11 @@ export default function Dashboard() {
     if (!currScreen) {
       currScreen = new BulletScreen('.screen');
       currScreen.push(
-        <StyledBullet head="assets/img/heads/girl.jpg" msg="欢迎体验rc-bullets弹幕功能~~" />,
+        <StyledBullet
+          size="huge"
+          head="assets/img/heads/girl.jpg"
+          msg="欢迎体验rc-bullets弹幕功能~~"
+        />,
         { duration: 40, top: '45%' }
       );
     }
@@ -100,7 +104,7 @@ export default function Dashboard() {
 
       // currScreen.push(bullet || mssg, newOpts);
       currScreen.push(
-        <StyledBullet msg={bullet || mssg} head={currHead} bgColor={bgColor} />,
+        <StyledBullet msg={bullet || mssg} head={currHead} backgroundColor={bgColor} />,
         newOpts
       );
       console.log({ mssg });

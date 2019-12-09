@@ -50,10 +50,12 @@ export default function Demo() {
         <StyledBullet
           head={headUrl}
           msg={bullet}
+          backgroundColor={'#fff'}
+          size='large'
         />
       );
       // or 还可以这样使用，效果等同使用 StyledBullet 组件
-      screen.push({msg:bullet,head:headUrl,color:"#eee" bgColor:"rgba(2,2,2,.3)"})
+      screen.push({msg:bullet,head:headUrl,color:"#eee" size="large" backgroundColor:"rgba(2,2,2,.3)"})
     }
   };
   return (
@@ -98,11 +100,16 @@ export default function Demo() {
 - 弹幕继续：`screen.resume([<bulletId>])`，无参则继续全部
 - 隐藏弹幕（滚动继续）：`screen.hide([<bulletId>])`，无参则隐藏全部
 - 显示弹幕：`screen.show([<bulletId>])`，无参则显示全部
-- 自带的一个弹幕样式组件：`<StyledBullet msg="<弹幕内容>" head="<头像地址>" color="<字体颜色>" bgColor="<背景色>">`
+- 自带的一个弹幕样式组件：`<StyledBullet msg="<弹幕内容>" head="<头像地址>" color="<字体颜色>" backgroundColor="<背景色>" size="<尺寸:small|normal|large|huge,默认normal>">`
 
 ## TO DO
 
+- ~~弹幕过多时，防重叠处理~~
 - react hooks 版本：`useBulletScreen`
+
+## 支持
+
+![赞赏码](example/src/assets/img/reward.jpg)
 
 ## License
 
