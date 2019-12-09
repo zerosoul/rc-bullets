@@ -1,60 +1,47 @@
 import React from 'react';
-import styled from 'styled-components';
 import { getCorrectTextColor } from './helper';
 
-const StyledWrapper = styled.div`
-  padding: 8px 18px;
-  border: 2px solid #fff;
-  border-radius: 26px;
-  background-color: ${({ bgColor }) => bgColor};
-  position: relative;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  word-break: keep-all;
-  white-space: pre-wrap;
-  .msg {
-    font-size: 22px;
-    line-height: 1.4;
-    color: ${({ color }) => color};
-  }
-  .head {
-    position: absolute;
-    left: -58px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 2px solid #eee;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
-    img {
-      border-radius: 50%;
-      width: 100%;
-      height: 100%;
-    }
-    &:after {
-      position: absolute;
-      top: 50%;
-      right: -14px;
-      transform: translateY(-50%);
-      content: '';
-      display: block;
-      width: 8px;
-      height: 2px;
-      background: #fff;
-    }
-  }
-`;
+const WrapperStyle = {
+  padding: '8px 18px',
+  border: '2px solid #fff',
+  borderRadius: '26px',
+  position: 'relative',
+  boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
+  wordBreak: 'keep-all',
+  whiteSpace: 'pre-wrap'
+};
+const MsgStyle = {
+  fontSize: '22px',
+  fontWeight: '800',
+  lineHeight: '1.4'
+};
+const HeadStyle = {
+  position: 'absolute',
+  left: '-50px',
+  top: '50%',
+  transform: 'translateY(-50%)',
+  width: '40px',
+  height: '40px',
+  borderRadius: '50%',
+  border: '2px solid #eee',
+  boxShadow: '0 0 10px rgba(0, 0, 0, 0.8)'
+};
+const ImageStyle = {
+  borderRadius: '50%',
+  width: '100%',
+  height: '100%'
+};
 const StyledBullet = ({ msg, head, color, bgColor = '#fff' }) => {
   const fontColor = color || getCorrectTextColor(bgColor);
   return (
-    <StyledWrapper color={fontColor} bgColor={bgColor}>
+    <div style={{ ...WrapperStyle, backgroundColor: bgColor }}>
       {head && (
-        <div className="head">
-          <img src={head} alt="msg head" />
+        <div style={{ ...HeadStyle }}>
+          <img src={head} style={ImageStyle} alt="msg head" />
         </div>
       )}
-      <div className="msg">{msg}</div>
-    </StyledWrapper>
+      <div style={{ ...MsgStyle, color: fontColor }}>{msg}</div>
+    </div>
   );
 };
 export default StyledBullet;
