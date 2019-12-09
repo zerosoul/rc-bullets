@@ -39,7 +39,7 @@ const sizes = {
 };
 const StyledBullet = ({ msg, head, size = 'normal', color, backgroundColor = '#fff' }) => {
   color = color || getCorrectTextColor(backgroundColor);
-  const fontSize = sizes[size];
+  const fontSize = sizes[size] || size;
   return (
     <div style={{ ...WrapperStyle, backgroundColor, fontSize }}>
       {head && (

@@ -100,7 +100,7 @@ export default function Demo() {
 - 弹幕继续：`screen.resume([<bulletId>])`，无参则继续全部
 - 隐藏弹幕（滚动继续）：`screen.hide([<bulletId>])`，无参则隐藏全部
 - 显示弹幕：`screen.show([<bulletId>])`，无参则显示全部
-- 自带的一个弹幕样式组件：`<StyledBullet msg="<弹幕内容>" head="<头像地址>" color="<字体颜色>" backgroundColor="<背景色>" size="<尺寸:small|normal|large|huge,默认normal>">`
+- 自带的一个弹幕样式组件：`<StyledBullet msg="<弹幕内容>" head="<头像地址>" color="<字体颜色>" backgroundColor="<背景色>" size="<尺寸:small|normal|large|huge|自定义大小,基于em机制，默认normal>">`
 
 ## TO DO
 
