@@ -59,7 +59,7 @@ export default class BulletScreen {
     const options = Object.assign({}, this.options, opts);
     console.log({ options });
 
-    const { onStart, onEnd } = options;
+    const { onStart, onEnd, top } = options;
     const bulletContainer = getContainer({
       ...options,
       currScreen: this
@@ -71,9 +71,9 @@ export default class BulletScreen {
     const currIdletrack = this._getTrack();
     if (currIdletrack === -1 || this.allPaused) {
       // 考虑到全部暂停的情景
-      this.queues.push([item, bulletContainer]);
+      this.queues.push([item, bulletContainer, top]);
     } else {
-      this._render(item, bulletContainer, currIdletrack);
+      this._render(item, bulletContainer, currIdletrack, top);
     }
 
     if (onStart) {
@@ -101,7 +101,7 @@ export default class BulletScreen {
     // 返回该容器的ID
     return bulletContainer.id;
   }
-  _render = (item, container, track) => {
+  _render = (item, container, track, top) => {
     this.target.appendChild(container);
     const { gap, trackHeight } = this.options;
     // 弹幕渲染进屏幕
@@ -113,9 +113,9 @@ export default class BulletScreen {
       ) : null,
       container,
       () => {
-        let top = track * trackHeight;
+        let trackTop = track * trackHeight;
         container.dataset.track = track;
-        container.style.top = `${top}px`;
+        container.style.top = top ? top : `${trackTop}px`;
         let options = {
           root: this.target,
           rootMargin: `0px ${gap} 0px 0px`,
@@ -131,8 +131,8 @@ export default class BulletScreen {
               console.log('curr track value', this.tracks[trackIdx]);
               console.log('curr queues', this.queues);
               if (this.queues.length) {
-                const [item, container] = this.queues.shift();
-                this._render(item, container, trackIdx);
+                const [item, container, customTop] = this.queues.shift();
+                this._render(item, container, trackIdx, customTop);
               } else {
                 this.tracks[trackIdx] = true;
               }
