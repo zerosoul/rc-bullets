@@ -8,6 +8,7 @@
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
+  "homepage": "https://zerosoul.github.io/rc-bullets",
   "engines": {
     "node": ">=8",
     "npm": ">=5"
