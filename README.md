@@ -108,6 +108,20 @@ export default function Demo() {
 - ~~弹幕过多时，防重叠处理~~
 - react hooks 版本：`useBulletScreen`
 
+## 自己动手，丰衣足食
+
+### 克隆项目
+
+`git clone https://github.com/zerosoul/rc-bullets.git && cd rc-bullets`
+
+### 本地类库构建
+
+`npm install && npm run start`
+
+### 本地demo
+
+`cd example && npm i && npm run start`
+
 ## 支持
 
 ![赞赏码](example/src/assets/img/reward.jpg)
