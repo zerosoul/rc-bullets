@@ -21,7 +21,7 @@ export default {
       plugins: [
         terser({
           compress: {
-            drop_console: process.env.NODE_ENV !== 'production'
+            drop_console: process.env.NODE_ENV == 'production'
           }
         })
       ]
@@ -34,7 +34,7 @@ export default {
       plugins: [
         terser({
           compress: {
-            drop_console: process.env.NODE_ENV !== 'production'
+            drop_console: process.env.NODE_ENV == 'production'
           }
         })
       ]
