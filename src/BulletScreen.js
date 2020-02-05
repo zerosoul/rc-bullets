@@ -26,9 +26,9 @@ export default class BulletScreen {
     } else {
       throw new Error('The display target of the barrage must be set');
     }
-    // 初始化跑道
+    // 初始化跑道，全部是空闲状态
     const { height } = this.target.getBoundingClientRect();
-    this.tracks = new Array(Math.floor(height / trackHeight)).fill(true);
+    this.tracks = new Array(Math.floor(height / trackHeight)).fill('idle');
     // 屏幕目标必须具备的CSS样式
     const { position } = getComputedStyle(this.target);
     if (position === 'static') {
@@ -41,16 +41,27 @@ export default class BulletScreen {
   _getTrack() {
     let readyIdxs = [];
     let idx = -1;
-    this.tracks.forEach((ready, idx) => {
-      if (ready) {
+    // 优先取空闲状态的
+    this.tracks.forEach((st, idx) => {
+      if (st==='idle') {
         readyIdxs.push(idx);
       }
     });
     if (readyIdxs.length) {
       idx = readyIdxs[Math.floor(Math.random() * readyIdxs.length)];
     }
+    if (idx===-1) {
+     // 其次是可以接上状态的
+    this.tracks.forEach((st, idx) => {
+      if (st==='feed') {
+        readyIdxs.push(idx);
+      }
+    });
+    if (readyIdxs.length) {
+      idx = readyIdxs[Math.floor(Math.random() * readyIdxs.length)];
+    }}
     if (idx !== -1) {
-      this.tracks[idx] = false;
+      this.tracks[idx] = 'running';
     }
     return idx;
   }
@@ -126,7 +137,7 @@ export default class BulletScreen {
             // 完全处于视窗之内
             const { intersectionRatio, target } = entry;
             console.log('bullet id', target.id, intersectionRatio);
-            if (intersectionRatio === 1) {
+            if (intersectionRatio >= 1) {
               let trackIdx = target.dataset.track;
               console.log('curr track value', this.tracks[trackIdx]);
               console.log('curr queues', this.queues);
@@ -134,7 +145,7 @@ export default class BulletScreen {
                 const [item, container, customTop] = this.queues.shift();
                 this._render(item, container, trackIdx, customTop);
               } else {
-                this.tracks[trackIdx] = true;
+                this.tracks[trackIdx] = 'feed';
               }
             }
           });
@@ -188,7 +199,7 @@ export default class BulletScreen {
       item.remove();
     });
     const { height } = this.target.getBoundingClientRect();
-    this.tracks = new Array(Math.floor(height / this.options.trackHeight)).fill(true);
+    this.tracks = new Array(Math.floor(height / this.options.trackHeight)).fill('idle');
     this.queues = [];
     this.bullets = [];
   }
