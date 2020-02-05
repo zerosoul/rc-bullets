@@ -1,28 +1,30 @@
 {
   "files": {
-    "main.js": "/rc-bullets/static/js/main.bb91508e.chunk.js",
-    "main.js.map": "/rc-bullets/static/js/main.bb91508e.chunk.js.map",
-    "runtime-main.js": "/rc-bullets/static/js/runtime-main.13905221.js",
-    "runtime-main.js.map": "/rc-bullets/static/js/runtime-main.13905221.js.map",
-    "static/js/2.c4d2e9b6.chunk.js": "/rc-bullets/static/js/2.c4d2e9b6.chunk.js",
-    "static/js/2.c4d2e9b6.chunk.js.map": "/rc-bullets/static/js/2.c4d2e9b6.chunk.js.map",
-    "static/js/3.2a6954d5.chunk.js": "/rc-bullets/static/js/3.2a6954d5.chunk.js",
-    "static/js/3.2a6954d5.chunk.js.map": "/rc-bullets/static/js/3.2a6954d5.chunk.js.map",
+    "main.js": "/rc-bullets/static/js/main.59eb8b53.chunk.js",
+    "main.js.map": "/rc-bullets/static/js/main.59eb8b53.chunk.js.map",
+    "runtime-main.js": "/rc-bullets/static/js/runtime-main.b619aeaf.js",
+    "runtime-main.js.map": "/rc-bullets/static/js/runtime-main.b619aeaf.js.map",
+    "static/js/2.f2ab8e6e.chunk.js": "/rc-bullets/static/js/2.f2ab8e6e.chunk.js",
+    "static/js/2.f2ab8e6e.chunk.js.map": "/rc-bullets/static/js/2.f2ab8e6e.chunk.js.map",
+    "static/js/3.f2b4d048.chunk.js": "/rc-bullets/static/js/3.f2b4d048.chunk.js",
+    "static/js/3.f2b4d048.chunk.js.map": "/rc-bullets/static/js/3.f2b4d048.chunk.js.map",
     "static/js/4.7307addd.chunk.js": "/rc-bullets/static/js/4.7307addd.chunk.js",
     "static/js/4.7307addd.chunk.js.map": "/rc-bullets/static/js/4.7307addd.chunk.js.map",
     "static/js/5.a294dada.chunk.js": "/rc-bullets/static/js/5.a294dada.chunk.js",
     "static/js/5.a294dada.chunk.js.map": "/rc-bullets/static/js/5.a294dada.chunk.js.map",
     "index.html": "/rc-bullets/index.html",
-    "precache-manifest.b96c946d590f9efae2987af942e06be1.js": "/rc-bullets/precache-manifest.b96c946d590f9efae2987af942e06be1.js",
     "service-worker.js": "/rc-bullets/service-worker.js",
-    "static/js/2.c4d2e9b6.chunk.js.LICENSE": "/rc-bullets/static/js/2.c4d2e9b6.chunk.js.LICENSE",
+    "service-worker.js.map": "/rc-bullets/service-worker.js.map",
+    "static/js/2.f2ab8e6e.chunk.js.LICENSE.txt": "/rc-bullets/static/js/2.f2ab8e6e.chunk.js.LICENSE.txt",
     "static/media/end.73c65247.mp3": "/rc-bullets/static/media/end.73c65247.mp3",
     "static/media/reward.75ef3c78.jpg": "/rc-bullets/static/media/reward.75ef3c78.jpg",
-    "static/media/start.943b632d.mp3": "/rc-bullets/static/media/start.943b632d.mp3"
+    "static/media/start.943b632d.mp3": "/rc-bullets/static/media/start.943b632d.mp3",
+    "workbox-ff0258e0.js": "/rc-bullets/workbox-ff0258e0.js",
+    "workbox-ff0258e0.js.map": "/rc-bullets/workbox-ff0258e0.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.13905221.js",
-    "static/js/2.c4d2e9b6.chunk.js",
-    "static/js/main.bb91508e.chunk.js"
+    "static/js/runtime-main.b619aeaf.js",
+    "static/js/2.f2ab8e6e.chunk.js",
+    "static/js/main.59eb8b53.chunk.js"
   ]
 }
