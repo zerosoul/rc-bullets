@@ -14,12 +14,6 @@ const initBulletAnimate = screen => {
   let to = `to { visibility: visible; transform: translateX(-100%); }`;
   style.sheet.insertRule(`@keyframes RightToLeft { ${from} ${to} }`, 0);
 
-  window.onresize = () => {
-    [...document.querySelectorAll(`.${animateClass}`)].map(ele => {
-      ele.remove();
-    });
-    initBulletAnimate(screen);
-  };
 };
 const isPlainObject = val => {
   if (val === null) {
