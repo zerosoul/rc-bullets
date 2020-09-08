@@ -66,7 +66,7 @@ const getContainer = opts => {
     bulletContainer.addEventListener(
       'mouseenter',
       () => {
-        console.log('enter');
+
 
         bulletContainer.style.animationPlayState = 'paused';
       },
@@ -75,7 +75,7 @@ const getContainer = opts => {
     bulletContainer.addEventListener(
       'mouseleave',
       () => {
-        console.log('leave');
+
         if (!currScreen.allPaused && !bulletContainer.dataset.clicked) {
           bulletContainer.style.animationPlayState = 'running';
         }
@@ -88,7 +88,7 @@ const getContainer = opts => {
     bulletContainer.addEventListener(
       'click',
       evt => {
-        console.log(evt);
+
         let currStatus = bulletContainer.style.animationPlayState;
         if (currStatus == 'paused' && bulletContainer.dataset.clicked) {
           bulletContainer.dataset.clicked = '';
@@ -118,14 +118,14 @@ function getCorrectTextColor(rgb = [0, 0, 0]) {
 
   */
   if ((typeof rgb === 'string' || rgb instanceof String) && rgb.indexOf('#') > -1) {
-    console.log('rgb is hex');
+
     rgb = convert.hex.rgb(rgb);
   } else if (typeof rgb === 'string') {
-    console.log('rgb string', rgb);
+
     rgb = getRGB(rgb);
-    console.log('rgb converted', rgb);
+
   }
-  console.log({ rgb });
+
 
   const threshold = 130; /* about half of 256. Lower threshold equals more dark text on dark background  */
   const [hRed, hGreen, hBlue] = rgb;
