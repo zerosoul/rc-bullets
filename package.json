@@ -1,7 +1,7 @@
 {
-  "name": "rc-bullets",
+  "name": "rc-bullets-without-console",
   "version": "1.5.12",
-  "description": "awesome barrage powered by CSS3 animation and built by react ",
+  "description": "awesome barrage powered by CSS3 animation and built by react 去掉console版本",
   "author": "zerosoul",
   "license": "MIT",
   "repository": "zerosoul/rc-bullets",
