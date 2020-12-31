@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import BulletScreen from 'rc-bullets';
 let Screen = null;
@@ -7,7 +7,7 @@ export default function ScreenPage() {
   const [visible, setVisible] = useState(true);
   useEffect(() => {
     Screen = new BulletScreen('.screen');
-    window.onstorage = function(e) {
+    window.onstorage = function (e) {
       console.log(
         'The ' + e.key + ' key has been changed from ' + e.oldValue + ' to ' + e.newValue + '.'
       );

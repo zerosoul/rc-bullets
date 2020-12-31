@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, lazy, Suspense } from 'react';
+import { useState, useEffect, useCallback, lazy, Suspense } from 'react';
 import styled from 'styled-components';
 import Mock from 'mockjs';
 // import { Link } from 'react-router-dom';

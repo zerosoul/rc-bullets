@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { IconButton, Tooltip, Modal } from '@material-ui/core';
 import {
   RotateLeft,
@@ -26,7 +26,7 @@ export default function ScreenPage({ screen }) {
     screen.clear();
   };
   const toggleModal = () => {
-    setModalVisible(prev => !prev);
+    setModalVisible((prev) => !prev);
   };
   const handleVisible = () => {
     if (visible) {

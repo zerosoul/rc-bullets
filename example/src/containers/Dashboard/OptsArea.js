@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button, TextField, Grid, Tooltip, Fab } from '@material-ui/core';
 import { Settings, Stop, Send, PlayCircleFilled } from '@material-ui/icons';
 export default function OptsArea({

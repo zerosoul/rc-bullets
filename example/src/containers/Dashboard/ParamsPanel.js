@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   InputLabel,
   TextField,
@@ -41,7 +40,7 @@ export default function ParamsPanel({
             <MenuItem value="random">
               <em>随机</em>
             </MenuItem>
-            {heads.map(head => {
+            {heads.map((head) => {
               const { title, path } = head;
               return (
                 <MenuItem key={path} value={path}>
@@ -60,7 +59,7 @@ export default function ParamsPanel({
             <MenuItem value="random">
               <em>随机</em>
             </MenuItem>
-            {Object.keys(themes).map(key => {
+            {Object.keys(themes).map((key) => {
               return (
                 <MenuItem key={key} value={key}>
                   <span
@@ -89,7 +88,7 @@ export default function ParamsPanel({
             <MenuItem value="random">
               <em>随机</em>
             </MenuItem>
-            {Object.keys(animateFuns).map(key => {
+            {Object.keys(animateFuns).map((key) => {
               return (
                 <MenuItem key={key} value={key}>
                   {animateFuns[key].title}
