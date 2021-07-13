@@ -93,7 +93,7 @@ export default function Demo() {
 | 选项           | 含义               | 值类型        | 默认值      | 备注                                                                                                                      |
 | -------------- | ------------------ | ------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------- |
 | top            | 弹幕位置           | string        | undefined   | 自已强制定制距离顶部的高度，格式同 CSS 中的 top                                                                           |
-| trackHeight    | 轨道高度           | string        | 50px        | 均分轨道的高度                                                                                                            |
+| trackHeight    | 轨道高度           | number        | 50          | 均分轨道的高度                                                                                                            |
 | onStart        | 自定义动画开始函数 | function      | null        | e.g.(bulletId,screen)=>{//do something}可以自定义一些动作，比如播放某个音效，在特定时间暂停该弹幕：screen.pause(bulletId) |
 | onEnd          | 自定义动画结束函数 | function      | null        | e.g.(bulletId,screen)=>{//do something}可以自定义一些动作，比如播放某个音效                                               |
 | pauseOnClick   | 鼠标点击暂停       | boolean       | false       | 再次点击继续                                                                                                              |
