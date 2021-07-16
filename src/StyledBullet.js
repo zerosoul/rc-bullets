@@ -38,7 +38,7 @@ const sizes = {
   huge: '16px'
 };
 const StyledBullet = ({ msg, head, size = 'normal', color, backgroundColor = '#fff' }) => {
-  color = color || getCorrectTextColor(backgroundColor);
+  const finalColor = color || getCorrectTextColor(backgroundColor);
   const fontSize = sizes[size] || size;
   return (
     <div style={{ ...WrapperStyle, backgroundColor, fontSize }}>
@@ -47,7 +47,7 @@ const StyledBullet = ({ msg, head, size = 'normal', color, backgroundColor = '#f
           <img src={head} style={ImageStyle} alt="msg head" />
         </div>
       )}
-      <div style={{ ...MsgStyle, color }}>{msg}</div>
+      <div style={{ ...MsgStyle, color: finalColor }}>{msg}</div>
     </div>
   );
 };
