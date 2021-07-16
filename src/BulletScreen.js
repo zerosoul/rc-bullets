@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { options, initBulletAnimate, isPlainObject, getContainer } from './helper';
+import { defaultOptions, initBulletAnimate, isPlainObject, getContainer } from './helper';
 import StyledBullet from './StyledBullet';
 
 export default class BulletScreen {
   target = null;
-  options = options;
+  options = defaultOptions;
   bullets = [];
   allPaused = false;
   allHide = false;
@@ -43,23 +43,24 @@ export default class BulletScreen {
     let idx = -1;
     // 优先取空闲状态的
     this.tracks.forEach((st, idx) => {
-      if (st==='idle') {
+      if (st === 'idle') {
         readyIdxs.push(idx);
       }
     });
     if (readyIdxs.length) {
       idx = readyIdxs[Math.floor(Math.random() * readyIdxs.length)];
     }
-    if (idx===-1) {
-     // 其次是可以接上状态的
-    this.tracks.forEach((st, idx) => {
-      if (st==='feed') {
-        readyIdxs.push(idx);
+    if (idx === -1) {
+      // 其次是可以接上状态的
+      this.tracks.forEach((st, idx) => {
+        if (st === 'feed') {
+          readyIdxs.push(idx);
+        }
+      });
+      if (readyIdxs.length) {
+        idx = readyIdxs[Math.floor(Math.random() * readyIdxs.length)];
       }
-    });
-    if (readyIdxs.length) {
-      idx = readyIdxs[Math.floor(Math.random() * readyIdxs.length)];
-    }}
+    }
     if (idx !== -1) {
       this.tracks[idx] = 'running';
     }
@@ -102,7 +103,7 @@ export default class BulletScreen {
         onEnd.call(null, bulletContainer.id, this);
       }
       // 从集合中剔除
-      this.bullets = this.bullets.filter(function(obj) {
+      this.bullets = this.bullets.filter(function (obj) {
         return obj.id !== bulletContainer.id;
       });
       ReactDOM.unmountComponentAtNode(bulletContainer);
@@ -189,7 +190,7 @@ export default class BulletScreen {
     if (currItem) {
       ReactDOM.unmountComponentAtNode(currItem);
       currItem.remove();
-      this.bullets = this.bullets.filter(function(item) {
+      this.bullets = this.bullets.filter(function (item) {
         return item.id !== id;
       });
       return;

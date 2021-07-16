@@ -138,7 +138,7 @@ function getCorrectTextColor(rgb = [0, 0, 0]) {
   }
 }
 
-const options = {
+const defaultOptions = {
   // 跑道高度
   trackHeight: 50,
   // 弹幕之间的间距
@@ -154,4 +154,4 @@ const options = {
   direction: 'normal',
   animateTimeFun: 'linear'
 };
-export { options, initBulletAnimate, isPlainObject, getContainer, getCorrectTextColor };
+export { defaultOptions, initBulletAnimate, isPlainObject, getContainer, getCorrectTextColor };
