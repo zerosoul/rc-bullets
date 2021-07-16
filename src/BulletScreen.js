@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { options, initBulletAnimate, isPlainObject, getContainer } from './helper';
+import { defaultOptions, initBulletAnimate, isPlainObject, getContainer } from './helper';
 import StyledBullet from './StyledBullet';
 
 export default class BulletScreen {
   target = null;
-  options = options;
+  options = defaultOptions;
   bullets = [];
   allPaused = false;
   allHide = false;
@@ -14,7 +14,8 @@ export default class BulletScreen {
   constructor(ele, opts = {}) {
     // 更新默认配置项
     this.options = Object.assign(this.options, opts);
-    const { trackHeight } = this.options;
+    console.log('construction ' + this.options.animate)
+    const { trackHeight, animate } = this.options;
     // 设置弹幕目标
     if (typeof ele === 'string') {
       this.target = document.querySelector(ele);
@@ -36,7 +37,9 @@ export default class BulletScreen {
       // this.target.style.overflow = 'hidden';
     }
     // 插入css animation
-    initBulletAnimate(this.target);
+    console.log(animate)
+    initBulletAnimate(this.target, 'RightToLeft');
+    initBulletAnimate(this.target, 'Suspension')
   }
   _getTrack() {
     let readyIdxs = [];
@@ -67,8 +70,15 @@ export default class BulletScreen {
   }
 
   push(item, opts = {}) {
-    const options = Object.assign({}, this.options, opts);
+    console.log(this)
+    console.log('this ' + this.options.animate)
+    console.log('default ' + opts.animate)
+    let options = Object.assign({}, this.options, opts);
+
     console.log({ options });
+
+    if (opts.animate) options.animate = opts.animate
+    console.log('push ' + options.animate)
 
     const { onStart, onEnd, top } = options;
     const bulletContainer = getContainer({
