@@ -2,6 +2,8 @@
 
 > 🌈 基于 CSS3 Animation，使用 React 构建，可扩展，高性能。
 
+> ⚠️ 该类库已基本不维护，如有迭代需求，请移步TS版本：https://github.com/slatejack/rc-bullets-ts
+
 [![NPM](https://img.shields.io/npm/v/rc-bullets.svg)](https://www.npmjs.com/package/rc-bullets) [![NPM downloads](https://img.shields.io/npm/dm/rc-bullets.svg)](http://npmjs.com/package/rc-bullets) [![twitter](https://img.shields.io/twitter/follow/wsygc?style=social)](https://twitter.com/wsygc)
 
 ## 演示地址
