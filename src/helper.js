@@ -1,19 +1,32 @@
 import convert from 'color-convert';
 
-const initBulletAnimate = screen => {
+const initBulletAnimate = (screen, animateName='RightToLeft') => {
   if (!screen) {
     return;
   }
-  const animateClass = 'BULLET_ANIMATE';
+  const animateClass = {
+    RightToLeft: 'BULLET_ANIMATE_RIGHT_TO_LEFT',
+    Suspension: 'BULLET_ANIMATE_SUSPENSION'
+  };
 
   let style = document.createElement('style');
-  style.classList.add(animateClass);
+  style.classList.add(animateClass[animateName]);
   document.head.appendChild(style);
+  // eslint-disable-next-line no-unused-vars
   let { width } = screen.getBoundingClientRect();
-  let from = `from { visibility: visible; transform: translateX(${width}px); }`;
-  let to = `to { visibility: visible; transform: translateX(-100%); }`;
-  style.sheet.insertRule(`@keyframes RightToLeft { ${from} ${to} }`, 0);
-
+  const RightToLeftRule = `@keyframes RightToLeft {
+  from { visibility: visible; transform: translateX(${width}px); }
+  to {  visibility: visible; transform: translateX(-100%); }
+  }`;
+  const SuspensionRule = `@keyframes Suspension {
+  from { visibility: visible; transform: translateX(calc(${width/2}px - 50%)); }
+  to {  visibility: visible; transform: translateX(calc(${width/2}px - 50%)); }
+  }`;
+  const RuleSet = {
+    RightToLeft: RightToLeftRule,
+    Suspension: SuspensionRule
+  }
+  style.sheet.insertRule(RuleSet[animateName])
 };
 const isPlainObject = val => {
   if (val === null) {
@@ -49,6 +62,7 @@ const getContainer = opts => {
   // bulletContainer.style.zIndex = zIndex;
   bulletContainer.style.visibility = 'hidden';
   bulletContainer.style.animationName = animate;
+  console.log(animate)
   bulletContainer.style.animationIterationCount = loopCount;
   bulletContainer.style.animationDelay = isNaN(delay) ? delay : `${delay}s`;
   bulletContainer.style.animationDirection = direction;
